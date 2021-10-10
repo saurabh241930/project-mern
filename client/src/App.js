@@ -1,37 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { Container} from '@material-ui/core';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Angles from './components/Angles/Angles';
-import { getAngles } from './actions/angles';
-import useStyles from './styles';
-import memories from './images/memories.png';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
-const App = () => {
-  const [currentId, setCurrentId] = useState(0);
-  const dispatch = useDispatch();
-  const classes = useStyles();
 
-  useEffect(() => {
-    dispatch(getAngles());
-  }, [currentId, dispatch]);
-
-  return (
+const App = () => (
+  <BrowserRouter>
+  <Navbar />
     <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">CMC</Typography>
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={12}>
-              <Angles setCurrentId={setCurrentId} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/auth" exact component={Auth} />
+      </Switch>
     </Container>
-  );
-};
+  </BrowserRouter>
+);
 
 export default App;
+

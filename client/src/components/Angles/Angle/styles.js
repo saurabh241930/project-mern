@@ -17,7 +17,7 @@ export default makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderRadius: '15px',
+    borderRadius: '2px',
     height: '100%',
     position: 'relative',
   },
@@ -49,4 +49,13 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  addButton:{
+    marginLeft:'auto'
+  },
+  qualityName:{
+    fontSize:'20px',
+    margin:'0 auto',
+    paddingTop:'10px',
+    paddingBottom:'15px'
+  }
 });
