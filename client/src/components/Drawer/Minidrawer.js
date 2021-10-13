@@ -17,14 +17,18 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import useStyles  from './styles'
 import { withRouter } from "react-router-dom";
+
+
+import Main from '../Main/Main'
 
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
+  backgroundColor:'#ffd180',
+  color:'black',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -33,6 +37,8 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
+  backgroundColor:'orange',
+  color:'white',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -57,12 +63,16 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  backgroundColor:'#c9c9c9',
+  color:'black',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
+    backgroundColor:'#1c1a1a',
+    color:'white',
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -77,6 +87,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
+    
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme),
@@ -134,7 +145,7 @@ const Minidrawer = props => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            CLASSIC MARBLE COMPANY
           </Typography>
         </Toolbar>
       </AppBar>
@@ -158,12 +169,7 @@ const Minidrawer = props => {
           })}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 
-        {/* <Typography variant="h1">Bhai yaha dek</Typography> */}
-
-
-      </Box>
     </Box>
   );
 }

@@ -1,9 +1,11 @@
 import React from 'react'
+import Typography from '@mui/material/Typography';
+
 
 function Auth() {
     return (
         <div>
-            Auth
+            <Typography variant="h1">AUTH</Typography>
         </div>
     )
 }
