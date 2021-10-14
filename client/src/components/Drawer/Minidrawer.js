@@ -18,8 +18,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { withRouter } from "react-router-dom";
-
-
+import Button from '@mui/material/Button';
+import CustomDialog from '../Dialog/CustomDialog'
 import Main from '../Main/Main'
 
 
@@ -66,7 +66,7 @@ const AppBar = styled(MuiAppBar, {
   backgroundColor:'#c9c9c9',
   color:'black',
   transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
+    easing: theme.transitions.easing.easeIn,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
@@ -75,7 +75,7 @@ const AppBar = styled(MuiAppBar, {
     color:'white',
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
+      easing: theme.transitions.easing.easeIn,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
@@ -117,6 +117,12 @@ const Minidrawer = props => {
     }
   ];
   const [open, setOpen] = React.useState(false);
+  const [dialogOpen,setDialogueOpen] = React.useState(false)
+
+
+  React.useEffect(() => {
+    setDialogueOpen(dialogOpen);
+  }, [dialogOpen]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,9 +132,17 @@ const Minidrawer = props => {
     setOpen(false);
   };
 
+  const handleDialogOpen = () => {
+    setDialogueOpen(true)
+  }
+  const handleDialogClose = () => {
+    setDialogueOpen(false)
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      
       <AppBar position="fixed" open={open}>
 
         <Toolbar>
@@ -147,6 +161,7 @@ const Minidrawer = props => {
           <Typography variant="h6" noWrap component="div">
             CLASSIC MARBLE COMPANY
           </Typography>
+          <Button onClick={handleDialogOpen} style={{'backgroundColor':'orange','color':'black','marginRight':'0'}}>Filter</Button>
         </Toolbar>
       </AppBar>
       
@@ -169,6 +184,8 @@ const Minidrawer = props => {
           })}
         </List>
       </Drawer>
+
+      <CustomDialog dilaogOpenProp={dialogOpen} handleDialogCloseProp={handleDialogClose} />
 
     </Box>
   );
