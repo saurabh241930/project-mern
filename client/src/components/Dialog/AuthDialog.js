@@ -3,7 +3,7 @@ import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box} f
 import { InputUnstyled } from '@mui/core';
 import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-
+import ClearIcon from '@mui/icons-material/Clear';
 const ariaLabel = { 'aria-label': 'description' };
 
 const StyledInputElement = styled('input')(`
@@ -14,7 +14,7 @@ const StyledInputElement = styled('input')(`
   line-height: 1.4375em;
   background: rgb(243, 246, 249);
   border: 1px solid #E5E8EC;
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 6px 10px;
   color: #20262D;
   transition: width 300ms ease;
@@ -22,14 +22,27 @@ const StyledInputElement = styled('input')(`
   &:hover {
     background: #EAEEF3;
     border-color: #E5E8EC;
+    border-radius:0px
   }
 
   &:focus {
     outline: none;
     width: 320px;
     transition: width 200ms ease-out;
+    order-radius:0px;
+    background:#ffd180;
   }
 `);
+
+const StyledContainer = styled('div')(`
+   &:focus-within input {
+     outline: none;
+     width: 320px;
+     transition: width 200ms ease-out;
+     text-align:centre;
+     
+   }
+`)
 
 const CustomInput = React.forwardRef(function CustomInput(props, ref) {
   return (
@@ -37,7 +50,7 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
   );
 });
 
-
+ 
 const AuthDialog = (props) => {
 
   return (
@@ -54,12 +67,19 @@ const AuthDialog = (props) => {
       >
         <DialogTitle>Please login</DialogTitle>
         <DialogContent>
-        <CustomInput aria-label="Demo input" placeholder="Username" />
-        <br/>
-        <CustomInput aria-label="Demo input" placeholder="Password" />
+
+          <StyledContainer>
+            <CustomInput aria-label="Demo input" placeholder="Username" />
+            <br/>
+            <CustomInput onClick aria-label="Demo input" placeholder="Password" />
+            <br/>
+            <Button style={{'marginRight':'0 auto'}} onClick={props.handleDialogCloseProp} variant="contained">login</Button>
+          </StyledContainer>
+        
         </DialogContent>
-        <DialogActions>
-          <Button onClick={props.handleDialogCloseProp}>Close</Button>
+        <DialogActions style={{'textAlign':'center'}}>
+          
+          <Button onClick={props.handleDialogCloseProp}><ClearIcon/></Button>
         </DialogActions>
       </Dialog>
       <Box
