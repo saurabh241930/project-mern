@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme,alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -17,11 +17,64 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { withRouter } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CustomDialog from '../Dialog/CustomDialog'
-import Main from '../Main/Main'
+import AuthDialog from '../Dialog/AuthDialog'
 
+import Main from '../Main/Main'
+import LogoutIcon from '@mui/icons-material/Logout';
+import HelpIcon from '@mui/icons-material/Help';
+import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+
+
+
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 const drawerWidth = 240;
 
@@ -104,21 +157,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Minidrawer = props => {
   const theme = useTheme();
   const { history } = props;
-  const itemsList = [
-    {
-      text: "Home",
-      icon: <InboxIcon />,
-      onClick: () => history.push("/")
-    },
-    {
-      text: "Auth",
-      icon: <MailIcon />,
-      onClick: () => history.push("/auth")
-    }
-  ];
+  
   const [open, setOpen] = React.useState(false);
   const [dialogOpen,setDialogueOpen] = React.useState(false)
-
 
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
@@ -138,6 +179,35 @@ const Minidrawer = props => {
   const handleDialogClose = () => {
     setDialogueOpen(false)
   }
+
+  const itemsList = [
+    {
+      text: "Home",
+      icon: <HomeIcon />,
+      onClick: () => history.push("/")
+    },
+    {
+      text: "My Cart",
+      icon: <ShoppingCartIcon />,
+      onClick: () => history.push("/auth")
+    },
+    {
+      text: "Filter",
+      icon: <EditIcon />,
+      onClick: () => history.push("/auth")
+    },
+    {
+      text: "Need Help",
+      icon: <HelpIcon />,
+      onClick: handleDialogOpen
+    },
+    {
+      text: "Login",
+      icon: <LogoutIcon />,
+      onClick: () => history.push("/auth")
+    },
+  ];
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -161,7 +231,15 @@ const Minidrawer = props => {
           <Typography variant="h6" noWrap component="div">
             CLASSIC MARBLE COMPANY
           </Typography>
-          <Button onClick={handleDialogOpen} style={{'backgroundColor':'orange','color':'black','marginRight':'0'}}>Filter</Button>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
         </Toolbar>
       </AppBar>
       
@@ -185,7 +263,8 @@ const Minidrawer = props => {
         </List>
       </Drawer>
 
-      <CustomDialog dilaogOpenProp={dialogOpen} handleDialogCloseProp={handleDialogClose} />
+      <AuthDialog dilaogOpenProp={dialogOpen} handleDialogCloseProp={handleDialogClose} />
+
 
     </Box>
   );
