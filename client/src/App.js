@@ -45,6 +45,7 @@ export default function App() {
       <Switch>
         <Route exact from="/" render={props => <Main childText="home" {...props} />} />
         <Route exact path="/auth" render={props => <Main childText="auth" {...props} />} />
+        <Route exact path="/register-client" render={props => <Main childText="registerClient" {...props} />} />
       </Switch>
       </Box>
   );

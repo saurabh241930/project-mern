@@ -19,10 +19,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { withRouter } from "react-router-dom";
+import { withRouter,Link, useHistory, useLocation } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CustomDialog from '../Dialog/CustomDialog'
 import AuthDialog from '../Dialog/AuthDialog'
+import { useDispatch } from 'react-redux';
+
 
 import Main from '../Main/Main'
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -30,7 +32,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-
+import PersonIcon from '@mui/icons-material/Person';
 
 
 
@@ -156,14 +158,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const Minidrawer = props => {
   const theme = useTheme();
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
+  
+  const dispatch = useDispatch();
+  const location = useLocation();
   const { history } = props;
   
   const [open, setOpen] = React.useState(false);
   const [dialogOpen,setDialogueOpen] = React.useState(false)
-
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
-  }, [dialogOpen]);
+  }, [dialogOpen,]);
+
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  },[location])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -178,6 +187,11 @@ const Minidrawer = props => {
   }
   const handleDialogClose = () => {
     setDialogueOpen(false)
+  }
+
+
+  const handleLogout = () => {
+    setUser(null)
   }
 
   const itemsList = [
@@ -202,11 +216,13 @@ const Minidrawer = props => {
       onClick: handleDialogOpen
     },
     {
-      text: "Login",
-      icon: <LogoutIcon />,
+      text: user?.result? user.result.givenName:"login" ,
+      icon: user?.result? <PersonIcon/>:<LogoutIcon />,
       onClick: () => history.push("/auth")
     },
   ];
+
+
 
 
   return (
@@ -240,6 +256,9 @@ const Minidrawer = props => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          {user?.result &&
+          <Button onClick={handleLogout} variant="contained">Logout</Button>
+        }
         </Toolbar>
       </AppBar>
       
@@ -260,10 +279,11 @@ const Minidrawer = props => {
               </ListItem>
             );
           })}
+
         </List>
       </Drawer>
 
-      <AuthDialog dilaogOpenProp={dialogOpen} handleDialogCloseProp={handleDialogClose} />
+      <AuthDialog dilaogOpenProp={dialogOpen} historyProp={history} handleDialogCloseProp={handleDialogClose} />
 
 
     </Box>

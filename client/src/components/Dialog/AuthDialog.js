@@ -1,57 +1,70 @@
 import * as React from 'react';
-import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box} from '@mui/material';
+import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box,Grid} from '@mui/material';
 import { InputUnstyled } from '@mui/core';
 import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import ClearIcon from '@mui/icons-material/Clear';
-const ariaLabel = { 'aria-label': 'description' };
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import CustomInput from '../Utils/CustomInput'
+import { GoogleLogin } from 'react-google-login';
+import { AUTH } from '../../constants/actionTypes';
+import Icon from './Icon';
+import { useDispatch } from 'react-redux';
 
-const StyledInputElement = styled('input')(`
-  width: 200px;
-  font-size: 1rem;
-  font-family: IBM Plex Sans, sans-serif;
-  font-weight: 400;
-  line-height: 1.4375em;
-  background: rgb(243, 246, 249);
-  border: 1px solid #E5E8EC;
-  border-radius: 2px;
-  padding: 6px 10px;
-  color: #20262D;
-  transition: width 300ms ease;
 
-  &:hover {
-    background: #EAEEF3;
-    border-color: #E5E8EC;
-    border-radius:0px
-  }
+import useStyles from './styles';
 
-  &:focus {
-    outline: none;
-    width: 320px;
-    transition: width 200ms ease-out;
-    order-radius:0px;
-    background:#ffd180;
-  }
-`);
 
 const StyledContainer = styled('div')(`
    &:focus-within input {
      outline: none;
-     width: 320px;
      transition: width 200ms ease-out;
      text-align:centre;
      
    }
 `)
 
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  return (
-    <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref} />
-  );
-});
 
- 
 const AuthDialog = (props) => {
+
+
+  const classes = useStyles();
+  const isLoggedIn = false;
+  const [showPassword,showSetPassword] = React.useState(false)
+  const [forgotPassword,toggleShowPassword] = React.useState(false)
+  const dispatch = useDispatch();
+
+  function handleChange() {
+  
+  }
+  
+  const handleShowPassword = () => {
+    showSetPassword(true)
+  }
+
+  const handleForgotPassword = () => {
+    forgotPassword ? toggleShowPassword(false) : toggleShowPassword(true)
+  }
+
+
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    props.handleDialogCloseProp()
+
+
+    try {
+      dispatch({ type: AUTH, data: { result, token } });
+
+      props.historyProp.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleError = (error) => console.error(error);
+
 
   return (
     <>
@@ -66,15 +79,63 @@ const AuthDialog = (props) => {
         }}
       >
         <DialogTitle>Please login</DialogTitle>
+        <br/>
         <DialogContent>
+          <Grid>
+          { forgotPassword && (
+            <>
+            <StyledContainer>
+            <form className={classes.form}>
+              <Input name="email" label="First Name" placeholder="enter your last mail" handleChange={handleChange} autoFocus /><br/><br/>
+              <Button type="submit" fullWidth variant="contained" color="primary" >Send token on mail</Button>
+              </form>
+            </StyledContainer>
+            <br/>
+            <Grid container justify="flex-end">
+            <Grid item>
+              <Button onClick={handleForgotPassword}>Back to login</Button>
+            </Grid>
+          </Grid>
+            </>
+            )}
 
-          <StyledContainer>
-            <CustomInput aria-label="Demo input" placeholder="Username" />
+
+        {  !forgotPassword && (
+            <>
+            <StyledContainer>
+            <form className={classes.form}>
+            <Input name="email" label="Email Address" handleChange={handleChange} type="email" placeholder="email" /> 
+            <br/><br/>
+            <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+            <br/><br/>
+            <Button type="submit" fullWidth variant="contained" color="primary" >
+            { isLoggedIn ? 'Log Out' : 'Log In' }
+            </Button>
+            <br/><br/>
+            <GoogleLogin
+            clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
+                Google Sign In
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleError}
+            cookiePolicy="single_host_origin"
+          />
+            </form>
+            </StyledContainer>
             <br/>
-            <CustomInput onClick aria-label="Demo input" placeholder="Password" />
-            <br/>
-            <Button style={{'marginRight':'0 auto'}} onClick={props.handleDialogCloseProp} variant="contained">login</Button>
-          </StyledContainer>
+            <Grid container justify="flex-end">
+            <Grid item>
+              <Button onClick={handleForgotPassword}>Forgot password?</Button>
+            </Grid>
+          </Grid>
+            </>
+            )}
+
+          
+          </Grid>
         
         </DialogContent>
         <DialogActions style={{'textAlign':'center'}}>
