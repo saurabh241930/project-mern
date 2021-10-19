@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box,Grid} from '@mui/material';
 import { InputUnstyled } from '@mui/core';
-import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import ClearIcon from '@mui/icons-material/Clear';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import CustomInput from '../Utils/CustomInput'
+import Input from '../Utils/CustomInput'
 import { GoogleLogin } from 'react-google-login';
 import { AUTH } from '../../constants/actionTypes';
 import Icon from './Icon';

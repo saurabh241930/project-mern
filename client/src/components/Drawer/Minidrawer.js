@@ -33,6 +33,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import PersonIcon from '@mui/icons-material/Person';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 
 
@@ -168,7 +169,7 @@ const Minidrawer = props => {
   const [dialogOpen,setDialogueOpen] = React.useState(false)
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
-  }, [dialogOpen,]);
+  }, [dialogOpen]);
 
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('profile')));
@@ -209,6 +210,11 @@ const Minidrawer = props => {
       text: "Filter",
       icon: <EditIcon />,
       onClick: () => history.push("/auth")
+    },
+    {
+      text: "Register Client",
+      icon: <GroupAddIcon />,
+      onClick:() => history.push("/register-client")
     },
     {
       text: "Need Help",
