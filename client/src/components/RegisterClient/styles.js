@@ -17,7 +17,6 @@ export default makeStyles((theme) => ({
   },
   addNewClient:{
     backgroundColor:'#f5f5f5',
-    marginTop:'100px',
     padding:'20px',
     textAlign:'center'
 
