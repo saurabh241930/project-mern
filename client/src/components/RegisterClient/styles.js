@@ -15,7 +15,17 @@ export default makeStyles((theme) => ({
     paddingLeft:'100px',
     paddingRight:'100px'
   },
-  Title:{
-    fontWeight:'100'
+  addNewClient:{
+    backgroundColor:'#f5f5f5',
+    marginTop:'100px',
+    padding:'20px',
+    textAlign:'center'
+
+  },
+  title:{
+    paddingBottom:'50px'
+  },
+  presentationDetails:{
+    
   }
 }));
