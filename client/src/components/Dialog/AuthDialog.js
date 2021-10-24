@@ -10,8 +10,10 @@ import { GoogleLogin } from 'react-google-login';
 import { AUTH } from '../../constants/actionTypes';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signin } from '../../actions/auth';
 
-
+ 
 import useStyles from './styles';
 
 
@@ -27,16 +29,19 @@ const StyledContainer = styled('div')(`
 
 const AuthDialog = (props) => {
 
-
   const classes = useStyles();
+  const history = useHistory();
   const isLoggedIn = false;
   const [showPassword,showSetPassword] = React.useState(false)
   const [forgotPassword,toggleShowPassword] = React.useState(false)
+  const [formData,setFormData] = React.useState({
+    email:'',password:''
+})
   const dispatch = useDispatch();
 
-  function handleChange() {
-  
-  }
+  const handleChange = (e) =>{
+    setFormData({...formData,[e.target.name]:e.target.value})
+}
   
   const handleShowPassword = () => {
     showSetPassword(true)
@@ -61,6 +66,13 @@ const AuthDialog = (props) => {
       console.log(error);
     }
   };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData);
+    dispatch(signin(formData, history));
+}
 
   const googleError = (error) => console.error(error);
 
@@ -102,27 +114,29 @@ const AuthDialog = (props) => {
         {  !forgotPassword && (
             <>
             <StyledContainer>
-            <form className={classes.form}>
-            <Input name="email" label="Email Address" handleChange={handleChange} type="email" placeholder="email" /> 
-            <br/><br/>
-            <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-            <br/><br/>
-            <Button type="submit" fullWidth variant="contained" color="primary" >
-            { isLoggedIn ? 'Log Out' : 'Log In' }
-            </Button>
-            <br/><br/>
-            <GoogleLogin
-            clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
-                Google Sign In
+
+            <form className={classes.form} onSubmit={handleSubmit}>
+              <Input name="email" label="Email Address" handleChange={handleChange} type="email" placeholder="email" /> 
+              <br/><br/>
+              <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+              <br/><br/>
+              <Button type="submit" fullWidth variant="contained" color="primary" >
+              { isLoggedIn ? 'Log Out' : 'Log In' }
               </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleError}
-            cookiePolicy="single_host_origin"
-          />
+              <br/><br/>
+              <GoogleLogin
+              clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
+                  Google Sign In
+                </Button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleError}
+              cookiePolicy="single_host_origin"
+            />
             </form>
+
             </StyledContainer>
             <br/>
             <Grid container justify="flex-end">

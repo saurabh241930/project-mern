@@ -24,9 +24,6 @@ import Button from '@mui/material/Button';
 import CustomDialog from '../Dialog/CustomDialog'
 import AuthDialog from '../Dialog/AuthDialog'
 import { useDispatch } from 'react-redux';
-
-
-import Main from '../Main/Main'
 import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import EditIcon from '@mui/icons-material/Edit';
@@ -34,6 +31,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import {LOGOUT} from '../../constants/actionTypes'
+import { signout } from '../../actions/auth';
+import { set } from 'date-fns';
+
 
 
 
@@ -175,6 +176,7 @@ const Minidrawer = props => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   },[location])
 
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -192,6 +194,7 @@ const Minidrawer = props => {
 
 
   const handleLogout = () => {
+    dispatch({ type: LOGOUT })
     setUser(null)
   }
 

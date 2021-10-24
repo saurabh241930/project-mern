@@ -7,7 +7,6 @@ import useStyles from './styles';
 
 const Angles = ({ setCurrentId }) => {
 const angles = useSelector((state) => state.angles);
-console.log(angles);
 const classes = useStyles();
 
   return (

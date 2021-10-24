@@ -8,11 +8,15 @@ import RegisterClient from '../RegisterClient/RegisterClient'
 import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import useStyles from './styles';
+import PassPropsToChildComponents from './PassPropsToChildComponents'
+import { useSelector } from 'react-redux';
+
+
 
 const mapKeyToComponent = (key) => {
     switch (key) {
         case 'home':
-            return <Home/>
+            return <Home />
         case 'auth':
             return <Auth/>
         case 'registerClient':
@@ -26,9 +30,13 @@ const mapKeyToComponent = (key) => {
 
 const Main = (props) => {
     const classes = useStyles();
+    const user = useSelector((state) => state.auth);
+
     return (
         <Box className={classes.box} sx={{ flexGrow: 1 }}>
-            {mapKeyToComponent(props.childText)}           
+            <PassPropsToChildComponents currUser={user}>
+                {mapKeyToComponent(props.childText)}
+            </PassPropsToChildComponents>         
         </Box>
 
         

@@ -8,16 +8,26 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
+import { AUTH } from '../../constants/actionTypes';
+import { signup } from '../../actions/auth';
+
+
+
+ 
 
 const RegisterClient = (props) => {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
     const [addNewClient,setAddNewClient] = React.useState(false)
     const [client,setExistingClient] = React.useState(null)
     const [formData,setFormData] = React.useState({
-        clientName:'',clientEmail:'',clientContact:'',token:''
+        email:'',name:'',contact:''
     })
 
     const handleChange = (e) =>{
@@ -29,18 +39,19 @@ const RegisterClient = (props) => {
         }else{
             setAddNewClient(true)
         }
-        
     } 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData);
+        dispatch(signup(formData, history));
     }
 
     const classes = useStyles();
     return (
 
         <Grid container className={classes.container}  spacing={3}>
+            
         <Grid item xs={12}>
         <Typography className={classes.title} variant="h3">Register New Client</Typography>
         </Grid>
@@ -50,25 +61,28 @@ const RegisterClient = (props) => {
             <Grid item xs={12}>
                 <Typography variant="h5">Client Details</Typography>
             </Grid>
-
             {addNewClient?
             <>
-                <Grid item xs={12} sm={12} md={12}>
-                    <Button variant="outlined" fullWidth onClick={handleAddNewClient}>Select from existing client</Button>
+                <form className={classes.form} onSubmit={handleSubmit}>
+
+                <Grid item xs={12} sm={12} md={12} container rowSpacing={1}>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <Button variant="outlined" fullWidth onClick={handleAddNewClient}>Select from existing client</Button>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <Input name="name" label="Contact person name" handleChange={handleChange}/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <Input name="email" label="Contact person Email" handleChange={handleChange}/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <Input name="contact" label="Contact No" handleChange={handleChange}/> 
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <Button type='submit' variant="contained">Submit new client details</Button>
+                    </Grid> 
                 </Grid>
-                
-                <Grid item xs={12} sm={12} md={12}>
-                    <Input name="clientName" label="Contact person name" handleChange={handleChange}/>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                    <Input name="clientEmail" label="Contact person Email" handleChange={handleChange}/>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                    <Input name="clientContact" label="Contact No" handleChange={handleChange}/> 
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                    <Button type='submit' variant="contained" onClick={handleSubmit}>Submit new client details</Button>
-                </Grid>
+                </form>
             </>
             :
             <>

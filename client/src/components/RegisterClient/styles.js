@@ -24,7 +24,7 @@ export default makeStyles((theme) => ({
   title:{
     paddingBottom:'50px'
   },
-  presentationDetails:{
-    
+  form:{
+    width:'100%'
   }
 }));

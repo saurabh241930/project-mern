@@ -8,7 +8,7 @@ import Angles from '../Angles/Angles';
 import { useDispatch } from 'react-redux';
 
 
-const Home = () => {
+const Home = (props) => {
 
   const [currentId, setCurrentId] = useState(0);
   const classes = useStyles();
@@ -35,16 +35,3 @@ const Home = () => {
 export default Home
 
 
-// import React from 'react'
-// import Typography from '@mui/material/Typography';
-
-
-// function Home() {
-//   return (
-//     <div>
-//       <Typography variant="h1">HOME</Typography>:
-//     </div>
-//   )
-// }
-
-// export default Home
