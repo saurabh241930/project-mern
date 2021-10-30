@@ -1,9 +1,9 @@
 import express from 'express';
 
-import {getAngles} from '../controllers/angles.js'
+import {getCategories} from '../controllers/categories.js'
 
 const router = express.Router();
 
-router.get('/',getAngles)
+router.get('/',getCategories)
 
 export default router;

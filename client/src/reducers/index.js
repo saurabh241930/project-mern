@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import angles from './angles';
+import categories from './categories';
 import auth from './auth';
 
-export const reducers = combineReducers({ angles,auth });
+export const reducers = combineReducers({ categories,auth });

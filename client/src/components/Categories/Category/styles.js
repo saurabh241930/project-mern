@@ -4,7 +4,7 @@ export default makeStyles({
   media: {
     height: 0,
     paddingTop: '56.25%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    background: 'linear-gradient(to right bottom, #430089, #82ffa1)',
     backgroundBlendMode: 'darken',
   },
   border: {
@@ -17,7 +17,6 @@ export default makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderRadius: '2px',
     height: '100%',
     position: 'relative',
   },
@@ -26,9 +25,12 @@ export default makeStyles({
     top: '20px',
     left: '20px',
     color: 'white',
+    backgroundColor:'rgba(0,0,0,0.3)',
+    padding:'10px'
   },
   overlay2: {
     position: 'absolute',
+    backgroundColor:'rgba(255, 165, 0,0.5)',
     top: '20px',
     right: '20px',
     color: 'white',
@@ -44,18 +46,10 @@ export default makeStyles({
   title: {
     padding: '0 16px',
   },
-  cardActions: {
-    padding: '0 16px 8px 16px',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
   addButton:{
     marginLeft:'auto'
   },
-  qualityName:{
-    fontSize:'20px',
-    margin:'0 auto',
-    paddingTop:'10px',
-    paddingBottom:'15px'
+  action:{
+    display:'none'
   }
 });

@@ -14,5 +14,5 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
-export const fetchAngles = () => API.get('/angles');
+export const fetchCategories = () => API.get('/categories');
 

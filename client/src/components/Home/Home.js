@@ -1,10 +1,11 @@
-import { getAngles } from '../../actions/angles';
+import { getCategories } from '../../actions/categories';
 import { Container, Grow,Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import CustomSnackbar from '../Snackbar/CustomSnackbar';
 import useStyles from './styles';
 
 
-import Angles from '../Angles/Angles';
+import Categories from '../Categories/Categories';
 import { useDispatch } from 'react-redux';
 
 
@@ -15,7 +16,7 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAngles());
+    dispatch(getCategories());
   }, [currentId, dispatch]);
 
 
@@ -24,11 +25,12 @@ const Home = (props) => {
        <Container>
          <Grid className={classes.adjustTop} container justify="space-between" alignItems="stretch" spacing={3}>
            <Grid item xs={12} sm={12}>
-             <Angles setCurrentId={setCurrentId} />
+             <Categories setCurrentId={setCurrentId} />
            </Grid>
          </Grid>
        </Container>
      </Grow>
+
     )
 }
 
