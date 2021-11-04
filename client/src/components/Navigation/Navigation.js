@@ -15,7 +15,14 @@ const Navigation = () => {
                     exact
                     from="/"
                     render={(props) => {
-                    return <Main childText="home" {...props} />;
+                    return <Main childText="categories" {...props} />;
+                    }}
+                />
+                <Route
+                    exact
+                    from="/map"
+                    render={(props) => {
+                    return <Main childText="map" {...props} />;
                     }}
                 />
                 <Route

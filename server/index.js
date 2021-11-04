@@ -6,7 +6,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import categoriesRoutes from './routes/categories.js';
-import userRouter from "./routes/user.js";
+import userRoutes from "./routes/user.js";
+import marbleRoutes from './routes/marbles.js'
 
 
 const app = express();
@@ -17,7 +18,8 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
 app.use('/categories', categoriesRoutes);
-app.use("/user", userRouter);
+app.use("/user", userRoutes);
+app.use('/marbles',marbleRoutes)
 
 const CONNECTION_URL = 'mongodb+srv://chirag773:chirag123@inspactio-6btjg.mongodb.net/cmc?retryWrites=true&w=majority';
 const PORT = 5000;

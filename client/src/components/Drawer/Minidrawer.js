@@ -32,6 +32,8 @@ import InputBase from '@mui/material/InputBase';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {LOGOUT} from '../../constants/actionTypes'
+import MapIcon from '@mui/icons-material/Map';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import { signout } from '../../actions/auth';
 import { set } from 'date-fns';
 
@@ -200,9 +202,14 @@ const Minidrawer = props => {
 
   const itemsList = [
     {
-      text: "Home",
-      icon: <HomeIcon />,
+      text: "Categories",
+      icon: <ViewListIcon />,
       onClick: () => history.push("/")
+    },
+    {
+      text: "Map",
+      icon: <MapIcon />,
+      onClick: () => history.push("/map")
     },
     {
       text: "My Cart",

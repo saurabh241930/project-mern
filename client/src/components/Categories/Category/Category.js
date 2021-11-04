@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
 
-const Category = ({ category, setCurrentId,handleAddToCart }) => {
+const Category = ({ category, setCurrentId,handleViewMarbleCategory }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -19,8 +19,8 @@ const Category = ({ category, setCurrentId,handleAddToCart }) => {
         <Typography variant="body2">{category.colors}</Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button onClick={handleAddToCart} style={{ color: 'white' }} size="small" onClick={() => { 
-   handleAddToCart(category.qualityName);
+        <Button style={{ color: 'white' }} size="small" onClick={() => { 
+   handleViewMarbleCategory(category.qualityName);
    setCurrentId(category._id)
   }
  }><AppsIcon fontSize="large" /></Button>

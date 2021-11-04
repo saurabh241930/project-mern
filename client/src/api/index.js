@@ -15,4 +15,6 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const fetchCategories = () => API.get('/categories');
+export const fetchMarblesByCategory = (categoryQuality) => API.get(`/marbles/${categoryQuality}`)
+export const fetchAllMarblesAnglewise = () => API.get('/marbles/all/anglwise')
 

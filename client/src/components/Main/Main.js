@@ -10,15 +10,18 @@ import Paper from '@mui/material/Paper';
 import useStyles from './styles';
 import PassPropsToChildComponents from './PassPropsToChildComponents'
 import { useSelector } from 'react-redux';
+import Map from '../Map/Map';
 
 
 
 const mapKeyToComponent = (key) => {
     switch (key) {
-        case 'home':
+        case 'categories':
             return <Home />
         case 'auth':
             return <Auth/>
+        case 'map':
+            return <Map/>
         case 'registerClient':
             return <RegisterClient/>     
         default:
