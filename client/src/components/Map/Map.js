@@ -7,6 +7,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { getMarblesAnglewise, getMarblesByCategory } from '../../actions/marbles';
 import useStyles from './styles';
 import Angle from '../Angle/Angle';
+import CartDialog from '../Dialog/CartDialog';
 
 
 
@@ -17,11 +18,24 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
+
 const Map =() => {
     const dispatch = useDispatch();
-
     const classes = useStyles();
+    const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
+    const [MarbleDetailOnDialog,setMarbleDetailOnDialog] = React.useState(null)
 
+
+
+    const handleViewMore = (marble) => {
+      setMarbleDetailOnDialog(marble)
+      setCartDialogOpenState(true)
+    }
+
+    const handleDialogClose = () => {
+      setCartDialogOpenState(false)
+    }
 
     React.useEffect(() => {
         dispatch(getMarblesAnglewise());
@@ -35,10 +49,11 @@ const Map =() => {
         <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
           {marblesAnglewise.map((marbles) => (
             <Grid className={classes.angles} container key={marbles._id} item xs={12} sm={4} md={4}>
-                <Angle marbles={marbles}/>
+                <Angle marbles={marbles} handleViewMore={handleViewMore}/>
             </Grid>
           ))}
           {/* <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp} handleSnackBarCloseProp={handleSnackBarCloseAction}/> */}
+          <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose}/>
         </Grid>
       )
   );

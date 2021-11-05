@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import CartDialog from '../Dialog/CartDialog';
 
 import AppsIcon from '@mui/icons-material/Apps';
 
@@ -17,14 +18,13 @@ const Item = styled(Paper)(({ theme }) => ({
     backgroundImage: 'https://4.imimg.com/data4/LW/DQ/MY-10354786/artificial-quartz-500x500.jpg'
 }))
 
-const Angle = ({ marbles }) => {
+
+const Angle = ({ marbles,handleViewMore }) => {
     const dispatch = useDispatch();
     const classes = useStyles();
-
-
-    console.log(marbles);
     const gridCount = marbles.count <= 4 ? 12 / (marbles.count) : 2
-    console.log(gridCount);
+
+
 
     return (
         <Grid container rowSpacing={0} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
@@ -43,7 +43,7 @@ const Angle = ({ marbles }) => {
                 <Grid className={classes.marbleGrid} item xs={gridCount}>
                     <img className={classes.img} src={marble.image} /><br />
                     <span className={classes.marbleName}>{marble.qualityName}</span><br/>
-                    <Button variant="text">ADD TO CART</Button>
+                    <Button onClick={() => handleViewMore(marble)} variant="text">VIEW MORE</Button>
                 </Grid>
             ))}
 

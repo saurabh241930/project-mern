@@ -1,6 +1,10 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
 import AppsIcon from '@mui/icons-material/Apps';
+import Box from '@mui/material/Box';
+import Switch from '@mui/material/Switch';
+import Paper from '@mui/material/Paper';
+import Slide from '@mui/material/Slide';
 
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +16,7 @@ const Category = ({ category, setCurrentId,handleViewMarbleCategory }) => {
   const classes = useStyles();
 
   return (
+    
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={category.image} />
       <div className={classes.overlay}>

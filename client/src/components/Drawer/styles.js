@@ -7,8 +7,6 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '10px 50px',
     backgroundColor:'#423F40',
     marginBottom:'50px'
   },
@@ -37,5 +35,9 @@ export default makeStyles((theme) => ({
   brandContainer: {
     display: 'flex',
     alignItems: 'center',
+  },
+  logout:{
+    backgroundColor:'red'
   }
+
 }));

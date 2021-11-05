@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import Category from './Category/Category';
 import CustomSnackbar from '../Snackbar/CustomSnackbar';
+import CartDialog from '../Dialog/CartDialog';
+
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 
@@ -14,11 +16,22 @@ const dispatch = useDispatch();
 const categories = useSelector((state) => state.categories);
 const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
 const [snackbarChildProp, setSnackbarChildProp] = React.useState('');
+const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
+const [MarbleDetailOnDialog,setMarbleDetailOnDialog] = React.useState(null)
 
 const classes = useStyles();
 
 const handleSnackBarCloseAction = () => {
   setSnackbarOpenProp(false)
+}
+
+const handleViewMore = (marble) => {
+  setMarbleDetailOnDialog(marble)
+  setCartDialogOpenState(true)
+}
+
+const handleDialogClose = () => {
+  setCartDialogOpenState(false)
 }
 
 const handleViewMarbleCategory = (qualityName) => {

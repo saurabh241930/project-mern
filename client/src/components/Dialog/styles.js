@@ -28,6 +28,9 @@ export default makeStyles(theme => ({
   googleButton: {
     marginBottom: '10px',
   },
+  marbleImage:{
+    backgroundColor:'red'
+  }
 }));
 
 

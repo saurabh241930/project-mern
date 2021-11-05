@@ -36,6 +36,9 @@ import MapIcon from '@mui/icons-material/Map';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { signout } from '../../actions/auth';
 import { set } from 'date-fns';
+import { ClassNames } from '@emotion/react';
+import useStyles from './styles';
+
 
 
 
@@ -86,7 +89,7 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  backgroundColor:'#ffd180',
+  backgroundColor:'orange',
   color:'black',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -96,8 +99,8 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
-  backgroundColor:'orange',
-  color:'white',
+  backgroundColor:'black',
+  color:'orange',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -122,7 +125,7 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor:'#f5f5f5',
+  backgroundColor:'white',
   color:'black',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.easeIn,
@@ -130,7 +133,7 @@ const AppBar = styled(MuiAppBar, {
   }),
   ...(open && {
     marginLeft: drawerWidth,
-    backgroundColor:'#1c1a1a',
+    backgroundColor:'white',
     color:'white',
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -161,6 +164,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const Minidrawer = props => {
+  const classes = useStyles();
   const theme = useTheme();
   const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
   
@@ -203,32 +207,32 @@ const Minidrawer = props => {
   const itemsList = [
     {
       text: "Categories",
-      icon: <ViewListIcon />,
+      icon: <ViewListIcon style={{color:'orange'}} />,
       onClick: () => history.push("/")
     },
     {
       text: "Map",
-      icon: <MapIcon />,
+      icon: <MapIcon style={{color:'orange'}}/>,
       onClick: () => history.push("/map")
     },
     {
       text: "My Cart",
-      icon: <ShoppingCartIcon />,
+      icon: <ShoppingCartIcon style={{color:'orange'}}/>,
       onClick: () => history.push("/auth")
     },
     {
       text: "Filter",
-      icon: <EditIcon />,
+      icon: <EditIcon style={{color:'orange'}}/>,
       onClick: () => history.push("/auth")
     },
     {
       text: "Register Client",
-      icon: <GroupAddIcon />,
+      icon: <GroupAddIcon style={{color:'orange'}}/>,
       onClick:() => history.push("/register-client")
     },
     {
       text: "Need Help",
-      icon: <HelpIcon />,
+      icon: <HelpIcon style={{color:'orange'}}/>,
       onClick: handleDialogOpen
     },
     {
@@ -245,7 +249,7 @@ const Minidrawer = props => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       
-      <AppBar position="fixed" open={open}>
+      <AppBar className={classes.appBar} position="fixed" open={open}>
 
         <Toolbar>
           <IconButton
@@ -260,20 +264,9 @@ const Minidrawer = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            CLASSIC MARBLE COMPANY
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50"/>
           {user?.result &&
-          <Button onClick={handleLogout} variant="contained">Logout</Button>
+          <Button className={classes.logout} onClick={handleLogout} variant="contained">Logout</Button>
         }
         </Toolbar>
       </AppBar>
