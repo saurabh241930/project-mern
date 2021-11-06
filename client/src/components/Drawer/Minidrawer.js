@@ -38,52 +38,8 @@ import { signout } from '../../actions/auth';
 import { set } from 'date-fns';
 import { ClassNames } from '@emotion/react';
 import useStyles from './styles';
+import MyCartDialog from '../Dialog/MyCartDialog';
 
-
-
-
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
 
 const drawerWidth = 240;
 
@@ -167,12 +123,14 @@ const Minidrawer = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
+
   
   const dispatch = useDispatch();
   const location = useLocation();
   const { history } = props;
   
   const [open, setOpen] = React.useState(false);
+  const [cartOpen,setCartOpen] = React.useState(false)
   const [dialogOpen,setDialogueOpen] = React.useState(false)
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
@@ -192,17 +150,26 @@ const Minidrawer = props => {
   };
 
   const handleDialogOpen = () => {
+    console.log("login");
     setDialogueOpen(true)
   }
   const handleDialogClose = () => {
     setDialogueOpen(false)
   }
 
+  const handleCartDialogOpen = () => {
+    setCartOpen(true)
+  }
+
+  const handleCartDialogClose = () => {
+    setCartOpen(false)
+  }
 
   const handleLogout = () => {
     dispatch({ type: LOGOUT })
     setUser(null)
   }
+
 
   const itemsList = [
     {
@@ -236,9 +203,9 @@ const Minidrawer = props => {
       onClick: handleDialogOpen
     },
     {
-      text: user?.result? user.result.givenName:"login" ,
+      text: user?.result? "logout":"login" ,
       icon: user?.result? <PersonIcon/>:<LogoutIcon />,
-      onClick: () => history.push("/auth")
+      onClick: () => user?.result? handleLogout():handleDialogOpen()
     },
   ];
 
@@ -251,7 +218,7 @@ const Minidrawer = props => {
       
       <AppBar className={classes.appBar} position="fixed" open={open}>
 
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -266,7 +233,10 @@ const Minidrawer = props => {
           </IconButton>
           <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50"/>
           {user?.result &&
-          <Button className={classes.logout} onClick={handleLogout} variant="contained">Logout</Button>
+              <>
+              <Button variant="outlined" onClick={handleCartDialogOpen}  color="inherit"><ShoppingCartIcon style={{color:'orange',paddingRight:'5px'}}/> My Cart(0)</Button>
+              </>
+
         }
         </Toolbar>
       </AppBar>
@@ -293,6 +263,7 @@ const Minidrawer = props => {
       </Drawer>
 
       <AuthDialog dilaogOpenProp={dialogOpen} historyProp={history} handleDialogCloseProp={handleDialogClose} />
+      <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose}/>
 
 
     </Box>

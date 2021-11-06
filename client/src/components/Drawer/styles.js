@@ -37,7 +37,7 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
   },
   logout:{
-    backgroundColor:'red'
+    textAlign:'centre'
   }
 
 }));

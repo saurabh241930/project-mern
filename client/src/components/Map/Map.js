@@ -39,7 +39,7 @@ const Map =() => {
 
     React.useEffect(() => {
         dispatch(getMarblesAnglewise());
-      }, []);
+      }, [dispatch]);
 
     const marblesAnglewise = useSelector((state) => state.marbles);
 

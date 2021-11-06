@@ -1,9 +1,12 @@
 import { getCategories } from '../../actions/categories';
-import { Container, Grow,Grid ,Paper,Stack,Divider,Button} from '@mui/material';
+import { Container, Grow,Grid ,Paper,Stack,Divider,Button,IconButton} from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import CustomSnackbar from '../Snackbar/CustomSnackbar';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import useStyles from './styles';
 import { styled } from '@mui/material/styles';
+import ListIcon from '@mui/icons-material/List';
+import GridViewIcon from '@mui/icons-material/GridView';
 
 
 
@@ -36,13 +39,13 @@ const Home = (props) => {
       <div >
       <Stack className={classes.stack}
         direction="row"
-        justifyContent="center"
+        justifyContent="end"
         divider={<Divider orientation="vertical" flexItem />}
         spacing={2}
       >
-        <Button variant="outlined">Gallery View</Button>
-        <Button variant="outlined">Detailed View</Button>
-        <Button variant="outlined">List View</Button>
+        <IconButton><ListIcon/></IconButton>
+        <IconButton ><GridViewIcon/></IconButton>
+        <IconButton ><ZoomOutMapIcon/></IconButton>
       </Stack>
     </div>
          <Grid className={classes.adjustTop} container justify="space-between" alignItems="stretch" spacing={3}>

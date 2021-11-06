@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid, Paper } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid, Paper ,CircularProgress} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CartDialog from '../Dialog/CartDialog';
 
@@ -27,6 +27,7 @@ const Angle = ({ marbles,handleViewMore }) => {
 
 
     return (
+        !marbles.marbles.length ? <CircularProgress /> : (
         <Grid container rowSpacing={0} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
 
             <Grid item xs={12} style={{ textAlign: 'centre' }}>
@@ -38,7 +39,6 @@ const Angle = ({ marbles,handleViewMore }) => {
                     </span> </Typography>
 
             </Grid>
-
             {marbles.marbles.map((marble) => (
                 <Grid className={classes.marbleGrid} item xs={gridCount}>
                     <img className={classes.img} src={marble.image} /><br />
@@ -46,10 +46,8 @@ const Angle = ({ marbles,handleViewMore }) => {
                     <Button onClick={() => handleViewMore(marble)} variant="text">VIEW MORE</Button>
                 </Grid>
             ))}
-
-
-
         </Grid>
+        )
 
 
     );

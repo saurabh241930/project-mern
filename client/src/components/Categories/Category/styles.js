@@ -31,7 +31,7 @@ export default makeStyles({
   overlay2: {
     position: 'absolute',
     backgroundColor:'rgba(255, 165, 0,0.5)',
-    top: '20px',
+    bottom: '20px',
     right: '20px',
     color: 'white',
   },
