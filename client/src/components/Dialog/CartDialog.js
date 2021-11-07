@@ -3,15 +3,28 @@ import useStyles from './marbleDialogStyles.js';
 import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box,Grid,Typography} from '@mui/material';
 import Input from '@mui/material/Input';
 import DataTable from '../DataTable/DataTable.js'
+import { useSelector,useDispatch } from 'react-redux';
+import { cartAction, } from '../../actions/cart.js';
 
 const ariaLabel = { 'aria-label': 'description' };
 
 
 
 const CartDialog = (props) => {
-    console.log(props.showMarbleOnDialog);
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const currUser = props.currUser;
+    const isLoggedIn = !(currUser == null)
 
+    const handleAddToCart = (marbleId) => {
+      console.log("cc");
+      dispatch(cartAction(marbleId))
+    }
+
+    console.log(props.showMarbleOnDialog);
+  
+
+    
 
   return (
     <>
@@ -40,7 +53,12 @@ const CartDialog = (props) => {
                     <Typography variant='h8'><span className={classes.label}>Material : </span> {props.showMarbleOnDialog.material}</Typography><br/><br/>
                     <Grid container spacing={2}>
                         <Grid item sm={6} xs={6}>
-                            <Button variant="contained" fullWidth >Add to Cart</Button>
+                          {isLoggedIn?
+                           <Button variant="contained" fullWidth onClick={() => handleAddToCart(props.showMarbleOnDialog.marbleId)}>Add to Cart</Button>
+                           :
+                           <Button variant="contained" fullWidth disabled>Add to Cart</Button>
+                          }
+                            
                         </Grid>
                         <Grid item sm={6} xs={6}>
                             <Button variant="outlined"  fullWidth>Add to Favourites</Button>

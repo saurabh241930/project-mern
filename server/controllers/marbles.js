@@ -22,7 +22,8 @@ export const getMarbles = async(req,res) => {
                    _id: '$angle',
                    marbles: {
                       $push: {
-                         'qualityName': '$qualityName',
+                          'marbleId':'$_id',
+                          'qualityName': '$qualityName',
                           'basicMaterial':'$basicMaterial',
                           'description':'$description',
                           'material':'$material',

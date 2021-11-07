@@ -7,7 +7,8 @@ import morgan from 'morgan';
 
 import categoriesRoutes from './routes/categories.js';
 import userRoutes from "./routes/user.js";
-import marbleRoutes from './routes/marbles.js'
+import marbleRoutes from './routes/marbles.js';
+import cartRoutes from './routes/cart.js';
 
 
 const app = express();
@@ -15,10 +16,13 @@ const app = express();
 app.use(morgan('combined'))
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/categories', categoriesRoutes);
 app.use("/user", userRoutes);
 app.use('/marbles',marbleRoutes)
+app.use('/cart',cartRoutes)
 
 const CONNECTION_URL = 'mongodb+srv://chirag773:chirag123@inspactio-6btjg.mongodb.net/cmc?retryWrites=true&w=majority';
 const PORT = 5000;

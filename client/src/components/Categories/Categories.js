@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, CircularProgress } from '@mui/material';
+import { Grid, CircularProgress, Button,Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import Category from './Category/Category';
@@ -11,13 +11,14 @@ import { useDispatch } from 'react-redux';
 
 import { getMarblesByCategory } from '../../actions/marbles';
 
-const Categories = ({ setCurrentId }) => {
+const Categories = ({ setCurrentId,currUser }) => {
 const dispatch = useDispatch();
 const categories = useSelector((state) => state.categories);
 const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
 const [snackbarChildProp, setSnackbarChildProp] = React.useState('');
 const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
 const [MarbleDetailOnDialog,setMarbleDetailOnDialog] = React.useState(null)
+const currentUser = currUser;
 
 const classes = useStyles();
 
@@ -42,7 +43,7 @@ const handleViewMarbleCategory = (qualityName) => {
 
 
   return (
-    !categories.length ? <CircularProgress /> : (
+    currentUser == null ? <><Typography variant="h6">Your session is expired ,please login again to view categories</Typography></>: (
       <Grid className={classes.container} container alignItems="stretch" spacing={3}>
         {categories.map((category) => (
           <Grid key={category._id} item xs={12} sm={6} md={4}>

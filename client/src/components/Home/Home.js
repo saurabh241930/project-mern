@@ -24,6 +24,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = (props) => {
 
+  console.log(props.currUser);
+
   const [currentId, setCurrentId] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ const Home = (props) => {
     </div>
          <Grid className={classes.adjustTop} container justify="space-between" alignItems="stretch" spacing={3}>
            <Grid item xs={12} sm={12}>
-             <Categories setCurrentId={setCurrentId} />
+             <Categories currUser={props.currUser} />
            </Grid>
          </Grid>
        </Container>

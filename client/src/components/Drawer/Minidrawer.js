@@ -122,11 +122,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Minidrawer = props => {
   const classes = useStyles();
   const theme = useTheme();
-  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
+  const currUser = props.currUser;
 
-  
+
   const dispatch = useDispatch();
-  const location = useLocation();
   const { history } = props;
   
   const [open, setOpen] = React.useState(false);
@@ -135,10 +134,6 @@ const Minidrawer = props => {
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
   }, [dialogOpen]);
-
-  React.useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('profile')));
-  },[location])
 
 
   const handleDrawerOpen = () => {
@@ -167,7 +162,7 @@ const Minidrawer = props => {
 
   const handleLogout = () => {
     dispatch({ type: LOGOUT })
-    setUser(null)
+    props.setUser(null)
   }
 
 
@@ -203,9 +198,9 @@ const Minidrawer = props => {
       onClick: handleDialogOpen
     },
     {
-      text: user?.result? "logout":"login" ,
-      icon: user?.result? <PersonIcon/>:<LogoutIcon />,
-      onClick: () => user?.result? handleLogout():handleDialogOpen()
+      text: currUser? "logout":"login" ,
+      icon: currUser? <PersonIcon/>:<LogoutIcon />,
+      onClick: () => currUser? handleLogout():handleDialogOpen()
     },
   ];
 
@@ -232,9 +227,9 @@ const Minidrawer = props => {
             <MenuIcon />
           </IconButton>
           <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50"/>
-          {user?.result &&
+          {currUser &&
               <>
-              <Button variant="outlined" onClick={handleCartDialogOpen}  color="inherit"><ShoppingCartIcon style={{color:'orange',paddingRight:'5px'}}/> My Cart(0)</Button>
+              <IconButton onClick={handleCartDialogOpen}  color="inherit"><ShoppingCartIcon style={{color:'orange'}}/></IconButton>
               </>
 
         }

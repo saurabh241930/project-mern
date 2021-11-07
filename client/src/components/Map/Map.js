@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const Map =() => {
+const Map =(props) => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
@@ -43,7 +43,6 @@ const Map =() => {
 
     const marblesAnglewise = useSelector((state) => state.marbles);
 
-
   return (
     !marblesAnglewise.length ? <CircularProgress /> : (
         <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
@@ -53,7 +52,7 @@ const Map =() => {
             </Grid>
           ))}
           {/* <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp} handleSnackBarCloseProp={handleSnackBarCloseAction}/> */}
-          <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose}/>
+          <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose} currUser={props.currUser}/>
         </Grid>
       )
   );

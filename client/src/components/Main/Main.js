@@ -33,11 +33,10 @@ const mapKeyToComponent = (key) => {
 
 const Main = (props) => {
     const classes = useStyles();
-    const user = useSelector((state) => state.auth);
 
     return (
         <Box className={classes.box} sx={{ flexGrow: 1 }}>
-            <PassPropsToChildComponents currUser={user}>
+            <PassPropsToChildComponents currUser={props.currUser}>
                 {mapKeyToComponent(props.childText)}
             </PassPropsToChildComponents>         
         </Box>

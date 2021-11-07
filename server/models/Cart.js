@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import Marble from "./Marble";
+import Marble from "./Marble.js";
 
 const cartSchema = mongoose.Schema({
   ofUser: {
        type: String,
         unique:  true 
     },
-  marbles:[{
+  cartList:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: Marble
       }],

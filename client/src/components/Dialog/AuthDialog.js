@@ -72,6 +72,7 @@ const AuthDialog = (props) => {
     e.preventDefault()
     console.log(formData);
     dispatch(signin(formData, history));
+    props.handleDialogCloseProp()
 }
 
   const googleError = (error) => console.error(error);

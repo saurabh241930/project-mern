@@ -17,4 +17,5 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 export const fetchCategories = () => API.get('/categories');
 export const fetchMarblesByCategory = (categoryQuality) => API.get(`/marbles/${categoryQuality}`)
 export const fetchAllMarblesAnglewise = () => API.get('/marbles/all/anglwise')
+export const cartAction = (marbleId) => API.get(`/cart/action/${marbleId}`)
 
