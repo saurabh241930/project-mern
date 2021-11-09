@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 import { getMarblesByCategory } from '../../actions/marbles';
 
-const Categories = ({ setCurrentId,currUser }) => {
+const Categories = ({ currUser }) => {
 const dispatch = useDispatch();
 const categories = useSelector((state) => state.categories);
 const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
@@ -47,7 +47,7 @@ const handleViewMarbleCategory = (qualityName) => {
       <Grid className={classes.container} container alignItems="stretch" spacing={3}>
         {categories.map((category) => (
           <Grid key={category._id} item xs={12} sm={6} md={4}>
-            <Category category={category} setCurrentId={setCurrentId} handleViewMarbleCategory={handleViewMarbleCategory}/>
+            <Category category={category} handleViewMarbleCategory={handleViewMarbleCategory}/>
           </Grid>
         ))}
         <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp} handleSnackBarCloseProp={handleSnackBarCloseAction}/>

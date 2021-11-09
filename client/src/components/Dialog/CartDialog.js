@@ -4,7 +4,7 @@ import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box,Gr
 import Input from '@mui/material/Input';
 import DataTable from '../DataTable/DataTable.js'
 import { useSelector,useDispatch } from 'react-redux';
-import { cartAction, } from '../../actions/cart.js';
+import { cartAction,myCart } from '../../actions/cart.js';
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -16,15 +16,13 @@ const CartDialog = (props) => {
     const currUser = props.currUser;
     const isLoggedIn = !(currUser == null)
 
+    React.useEffect(() => {
+      dispatch(myCart());
+    }, [dispatch]);
+  
     const handleAddToCart = (marbleId) => {
-      console.log("cc");
       dispatch(cartAction(marbleId))
     }
-
-    console.log(props.showMarbleOnDialog);
-  
-
-    
 
   return (
     <>

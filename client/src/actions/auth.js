@@ -1,4 +1,4 @@
-import { AUTH,LOGOUT } from '../constants/actionTypes';
+import { AUTH,LOGOUT,SET_USER } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const signin = (formData, router) => async (dispatch) => {
@@ -33,6 +33,15 @@ export const signout = (router) => async(dispatch) => {
     dispatch({ type: LOGOUT });
     localStorage.clear()
     router.push('/');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export const setCurrentUser = (data) => async(dispatch) => {
+  try {
+    dispatch({ type: SET_USER, payload:data });
   } catch (error) {
     console.log(error);
   }

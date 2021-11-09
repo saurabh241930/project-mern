@@ -25,14 +25,12 @@ const Item = styled(Paper)(({ theme }) => ({
 const Home = (props) => {
 
   console.log(props.currUser);
-
-  const [currentId, setCurrentId] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
-  }, [currentId, dispatch]);
+  }, [props.currUser, dispatch]);
 
 
     return (

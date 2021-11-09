@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import useStyles from './MyCartStyles.js'
+import { Card ,CardMedia} from '@mui/material';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -20,6 +21,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const MyCartDialog = (props) => {
   const classes = useStyles();
+  const cartList = props.cartList;
+
 
   return (
     <div>
@@ -46,18 +49,24 @@ const MyCartDialog = (props) => {
             </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
+        {props.currUser &&
+          <List>
+            {cartList.map((marble) => (
+              <>
+              <ListItem button>
+                <Card className={classes.card}>
+                  <CardMedia className={classes.card} image={marble.image}/>
+                </Card>
+                <ListItemText primary={marble.qualityName} secondary={marble.basicMaterial}/>
+                </ListItem>
+              <Divider />
+              </>
+        ))}
+            
+         
         </List>
+        }
+        
       </Dialog>
     </div>
   );

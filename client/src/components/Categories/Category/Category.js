@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
 
-const Category = ({ category, setCurrentId,handleViewMarbleCategory }) => {
+const Category = ({ category,handleViewMarbleCategory }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -26,7 +26,6 @@ const Category = ({ category, setCurrentId,handleViewMarbleCategory }) => {
       <div className={classes.overlay2}>
         <Button style={{ color: 'white' }} size="small" onClick={() => { 
    handleViewMarbleCategory(category.qualityName);
-   setCurrentId(category._id)
   }
  }><AppsIcon fontSize="large" /></Button>
       </div>

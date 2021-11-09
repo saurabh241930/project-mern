@@ -39,6 +39,9 @@ import { set } from 'date-fns';
 import { ClassNames } from '@emotion/react';
 import useStyles from './styles';
 import MyCartDialog from '../Dialog/MyCartDialog';
+import { myCart } from '../../actions/cart';
+import { useSelector } from 'react-redux';
+
 
 
 const drawerWidth = 240;
@@ -135,7 +138,13 @@ const Minidrawer = props => {
     setDialogueOpen(dialogOpen);
   }, [dialogOpen]);
 
+  const cart = useSelector((state) => state.cart);
+  
+  React.useEffect(() => {
+    dispatch(myCart());
+  }, [dispatch]);
 
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -154,6 +163,7 @@ const Minidrawer = props => {
 
   const handleCartDialogOpen = () => {
     setCartOpen(true)
+    dispatch(myCart)
   }
 
   const handleCartDialogClose = () => {
@@ -162,7 +172,6 @@ const Minidrawer = props => {
 
   const handleLogout = () => {
     dispatch({ type: LOGOUT })
-    props.setUser(null)
   }
 
 
@@ -203,8 +212,6 @@ const Minidrawer = props => {
       onClick: () => currUser? handleLogout():handleDialogOpen()
     },
   ];
-
-
 
 
   return (
@@ -258,7 +265,10 @@ const Minidrawer = props => {
       </Drawer>
 
       <AuthDialog dilaogOpenProp={dialogOpen} historyProp={history} handleDialogCloseProp={handleDialogClose} />
-      <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose}/>
+      {currUser &&
+        <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose} cartList={cart.cartList} currUser={currUser}/>
+      }
+      
 
 
     </Box>
