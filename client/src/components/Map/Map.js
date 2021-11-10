@@ -8,6 +8,8 @@ import { getMarblesAnglewise, getMarblesByCategory } from '../../actions/marbles
 import useStyles from './styles';
 import Angle from '../Angle/Angle';
 import CartDialog from '../Dialog/CartDialog';
+import CustomSnackbar from '../Snackbar/CustomSnackbar';
+import { cartAction } from '../../actions/cart';
 
 
 
@@ -25,6 +27,8 @@ const Map =(props) => {
     const classes = useStyles();
     const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
     const [MarbleDetailOnDialog,setMarbleDetailOnDialog] = React.useState(null)
+    const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
+    const [snackbarChildProp, setSnackbarChildProp] = React.useState('');
 
 
 
@@ -35,6 +39,12 @@ const Map =(props) => {
 
     const handleDialogClose = () => {
       setCartDialogOpenState(false)
+    }
+
+    const handleAddToCart = (marbleId,qualityName) => {
+      dispatch(cartAction(marbleId))
+      setSnackbarOpenProp(true)
+      setSnackbarChildProp(qualityName)
     }
 
     React.useEffect(() => {
@@ -48,11 +58,11 @@ const Map =(props) => {
         <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
           {marblesAnglewise.map((marbles) => (
             <Grid className={classes.angles} container key={marbles._id} item xs={12} sm={4} md={4}>
-                <Angle marbles={marbles} handleViewMore={handleViewMore}/>
+                <Angle marbles={marbles} handleViewMore={handleViewMore} handleAddToCart={handleAddToCart}/>
             </Grid>
           ))}
-          {/* <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp} handleSnackBarCloseProp={handleSnackBarCloseAction}/> */}
           <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose} currUser={props.currUser}/>
+          <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp}/>
         </Grid>
       )
   );

@@ -51,17 +51,27 @@ const MyCartDialog = (props) => {
         </AppBar>
         {props.currUser &&
           <List>
-            {cartList.map((marble) => (
+            {cartList?
               <>
-              <ListItem button>
-                <Card className={classes.card}>
-                  <CardMedia className={classes.card} image={marble.image}/>
-                </Card>
-                <ListItemText primary={marble.qualityName} secondary={marble.basicMaterial}/>
-                </ListItem>
-              <Divider />
-              </>
-        ))}
+              {cartList.map((marble) => (
+                <>
+                <ListItem button>
+                  <Card className={classes.card}>
+                    <CardMedia className={classes.card} image={marble.image}/>
+                  </Card>
+                  <ListItemText primary={marble.qualityName} secondary={marble.basicMaterial}/>
+                  </ListItem>
+                <Divider />
+                </>
+          ))}
+            </>
+            :
+            <>
+            <Typography variant="h3">No items in cart</Typography>
+            </>
+            }
+            
+            
             
          
         </List>

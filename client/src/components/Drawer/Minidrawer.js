@@ -266,7 +266,7 @@ const Minidrawer = props => {
 
       <AuthDialog dilaogOpenProp={dialogOpen} historyProp={history} handleDialogCloseProp={handleDialogClose} />
       {currUser &&
-        <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose} cartList={cart.cartList} currUser={currUser}/>
+        <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose} cartList={cart.cart?.cartList} currUser={currUser}/>
       }
       
 

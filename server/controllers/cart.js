@@ -24,7 +24,7 @@ export const cartAction = async(req,res) => {
             const cartList = foundCart['cartList']
             if (cartList.includes(marbleId)){
 
-                const updatedCart = await Cart.findByIdAndUpdate(foundCart['_id'],{
+                const updated = await Cart.findByIdAndUpdate(foundCart['_id'],{
                     $pull:{
                        'cartList':marbleId  
                     },
@@ -32,10 +32,12 @@ export const cartAction = async(req,res) => {
                         'lastRemoved':marbleId
                     }
                  })
+                 const updatedCart = await Cart.findOne({"ofUser":mongoose.Types.ObjectId(req.userId)}).populate("cartList")
+                 console.log(updatedCart);
                  res.status(200).json(updatedCart)
 
             }else{
-                const updatedCart = await Cart.findByIdAndUpdate(foundCart['_id'],{
+                const updated = await Cart.findByIdAndUpdate(foundCart['_id'],{
                     $push:{
                         'cartList':marbleId  
                     },
@@ -43,12 +45,14 @@ export const cartAction = async(req,res) => {
                         'lastAdded':marbleId
                     }
                  })
+                 const updatedCart = await Cart.findOne({"ofUser":mongoose.Types.ObjectId(req.userId)}).populate("cartList")
+                 console.log(updatedCart);
                  res.status(200).json(updatedCart)
             }
         }
         else{
             const createdCart = await Cart.create({'ofUser':mongoose.Types.ObjectId(req.userId)})
-            const updatedCart = await Cart.findByIdAndUpdate(createdCart['_id'],{
+            const updated = await Cart.findByIdAndUpdate(createdCart['_id'],{
                 $push:{
                     'cartList':marbleId  
                 },
@@ -56,6 +60,8 @@ export const cartAction = async(req,res) => {
                     'lastAdded':marbleId
                 }
             })
+            const updatedCart = await Cart.findOne({"ofUser":mongoose.Types.ObjectId(req.userId)}).populate("cartList")
+            console.log(updatedCart);
             res.status(200).json(updatedCart)
         }
         
