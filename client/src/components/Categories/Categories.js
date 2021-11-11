@@ -74,7 +74,7 @@ const renderCategoryView = () => {
 
   return (
     // currentUser == null ? <><Typography variant="h6">Your session is expired ,please login again to view categories</Typography></>: (
-     {renderCategoryView}
+     renderCategoryView
     // )
   );
 };
