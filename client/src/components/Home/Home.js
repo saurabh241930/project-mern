@@ -24,9 +24,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = (props) => {
 
-  console.log(props.currUser);
   const classes = useStyles();
+  const [viewState,setViewState] = useState("grid")
   const dispatch = useDispatch();
+
+  const handleViewState = (view) => {
+    setViewState(view)
+  }
 
   useEffect(() => {
     dispatch(getCategories());
@@ -43,14 +47,14 @@ const Home = (props) => {
         divider={<Divider orientation="vertical" flexItem />}
         spacing={2}
       >
-        <IconButton><ListIcon/></IconButton>
-        <IconButton ><GridViewIcon/></IconButton>
-        <IconButton ><ZoomOutMapIcon/></IconButton>
+        <IconButton onClick={()=>handleViewState("list")}><ListIcon/></IconButton>
+        <IconButton onClick={()=>handleViewState("grid")}><GridViewIcon/></IconButton>
+        <IconButton onClick={()=>handleViewState("detail")}><ZoomOutMapIcon/></IconButton>
       </Stack>
     </div>
          <Grid className={classes.adjustTop} container justify="space-between" alignItems="stretch" spacing={3}>
            <Grid item xs={12} sm={12}>
-             <Categories currUser={props.currUser} />
+             <Categories currUser={props.currUser} viewState={viewState}/>
            </Grid>
          </Grid>
        </Container>

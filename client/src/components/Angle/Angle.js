@@ -3,7 +3,8 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid, Pa
 import { styled } from '@mui/material/styles';
 import CartDialog from '../Dialog/CartDialog';
 import { cartAction } from '../../actions/cart';
-
+import AddIcon from '@mui/icons-material/Add';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import AppsIcon from '@mui/icons-material/Apps';
 
 import { useDispatch } from 'react-redux';
@@ -20,12 +21,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 
-const Angle = ({ marbles,handleViewMore ,handleAddToCart}) => {
+const Angle = ({ marbles,handleViewMore ,handleAddToCart,isExistInCart,currUser}) => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const gridCount = marbles.count <= 4 ? 12 / (marbles.count) : 2
 
-    
   
 
     return (
@@ -45,7 +45,20 @@ const Angle = ({ marbles,handleViewMore ,handleAddToCart}) => {
                 <Grid className={classes.marbleGrid} item xs={gridCount}>
                     <img className={classes.img} src={marble.image} /><br />
                     <span className={classes.marbleName}>{marble.qualityName}</span><br/>
-                    <Button onClick={() => handleAddToCart(marble.marbleId,marble.qualityName)} variant="text">ADD TO CART</Button>
+                    {currUser?
+                    <>
+                    {isExistInCart(marble.marbleId)?
+                    <Button onClick={() => handleAddToCart(marble.marbleId,marble.qualityName)} variant="text"><AddIcon/> ADD ITEM</Button>
+                    :
+                    <Button onClick={() => handleAddToCart(marble.marbleId,marble.qualityName)} variant="text" color="error"> <HighlightOffIcon/> REMOVE ITEM</Button>
+                    }
+                    </>
+                    :
+                    <><Button variant="text" disabled>ADD TO CART</Button></>
+
+                    }
+                    
+                    
                 </Grid>
             ))}
         </Grid>

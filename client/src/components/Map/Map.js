@@ -27,14 +27,24 @@ const Map =(props) => {
     const classes = useStyles();
     const [CartDialogOpenState,setCartDialogOpenState] = React.useState(false)
     const [MarbleDetailOnDialog,setMarbleDetailOnDialog] = React.useState(null)
-    const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
-    const [snackbarChildProp, setSnackbarChildProp] = React.useState('');
+    const [snackBarState,setSnackBarState] = React.useState({'snackbarOpenProp':false,'snackbarChildProp':null,'snacbarActionText':null,'vertical':null,'horizontal':null})
+    console.log(props);
 
+    const cart = useSelector((state) => state.cart);
+    const cartList = cart.cart?.cartList
 
-
+    const isExistInCart = (marbleId) => {
+      const foundMarble =  cartList.filter(marble => marble._id == marbleId);
+      return (foundMarble.length == 0)
+    }
     const handleViewMore = (marble) => {
       setMarbleDetailOnDialog(marble)
       setCartDialogOpenState(true)
+    }
+
+    const handleSnackBarCloseProp = () => {
+      setSnackBarState({'snackbarOpenProp':false,'snackbarChildProp':null,'snacbarActionText':null,'vertical':null,'horizontal':null})
+
     }
 
     const handleDialogClose = () => {
@@ -43,8 +53,13 @@ const Map =(props) => {
 
     const handleAddToCart = (marbleId,qualityName) => {
       dispatch(cartAction(marbleId))
-      setSnackbarOpenProp(true)
-      setSnackbarChildProp(qualityName)
+      setSnackBarState({
+      'snackbarOpenProp':true,
+      'snackbarChildProp':qualityName,
+      'snacbarActionText':isExistInCart(marbleId)? "added to cart":"removed from cart",
+      'vertical':'bottom',
+      'horizontal':isExistInCart(marbleId)? "right":"left",
+    })
     }
 
     React.useEffect(() => {
@@ -58,11 +73,15 @@ const Map =(props) => {
         <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
           {marblesAnglewise.map((marbles) => (
             <Grid className={classes.angles} container key={marbles._id} item xs={12} sm={4} md={4}>
-                <Angle marbles={marbles} handleViewMore={handleViewMore} handleAddToCart={handleAddToCart}/>
+                <Angle marbles={marbles} handleViewMore={handleViewMore} handleAddToCart={handleAddToCart} isExistInCart={isExistInCart} currUser={props.currUser}/>
             </Grid>
           ))}
           <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose} currUser={props.currUser}/>
-          <CustomSnackbar openState={snackbarOpenProp} childText={snackbarChildProp}/>
+          <CustomSnackbar 
+              openState={snackBarState.snackbarOpenProp} 
+              childText={snackBarState.snackbarChildProp}
+              actionTypeText={snackBarState.snacbarActionText}
+              handleSnackBarCloseProp={handleSnackBarCloseProp}/>
         </Grid>
       )
   );

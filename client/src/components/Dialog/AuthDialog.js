@@ -121,14 +121,14 @@ const AuthDialog = (props) => {
               <br/><br/>
               <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
               <br/><br/>
-              <Button type="submit" fullWidth variant="contained" color="primary" >
+              <Button type="submit" fullWidth variant="text" color="primary" >
               { isLoggedIn ? 'Log Out' : 'Log In' }
               </Button>
               <br/><br/>
               <GoogleLogin
               clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
               render={(renderProps) => (
-                <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
+                <Button className={classes.googleButton} color="warning" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
                   Google Sign In
                 </Button>
               )}

@@ -28,7 +28,7 @@ const classes = useStyles();
   const message = (
       <>
         <Typography className={classes.qualityName} variant='h4'>{props.childText}</Typography>
-        <Typography>Added to cart</Typography>
+        <Typography>{props.actionTypeText}</Typography>
       </>
 
   )
@@ -36,6 +36,7 @@ const classes = useStyles();
     <div className={classes.Snackbar}>
       <Snackbar
         className={classes.Snackbar}
+        anchorOrigin={ props.vertical, props.horizontal }
         open={props.openState}
         autoHideDuration={3000}
         onClose={props.handleSnackBarCloseProp}

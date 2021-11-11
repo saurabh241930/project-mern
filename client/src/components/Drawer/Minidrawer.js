@@ -142,7 +142,7 @@ const Minidrawer = props => {
   
   React.useEffect(() => {
     dispatch(myCart());
-  }, [dispatch]);
+  }, [dispatch,cartOpen]);
 
   
   const handleDrawerOpen = () => {
@@ -154,7 +154,6 @@ const Minidrawer = props => {
   };
 
   const handleDialogOpen = () => {
-    console.log("login");
     setDialogueOpen(true)
   }
   const handleDialogClose = () => {
