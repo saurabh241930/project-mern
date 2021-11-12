@@ -15,8 +15,6 @@ import { useDispatch } from 'react-redux';
 import { getMarblesByCategory } from '../../actions/marbles';
 
 
-
-
 const Categories = ({ currUser, viewState }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
@@ -49,7 +47,7 @@ const Categories = ({ currUser, viewState }) => {
 
 
   return (
-    currentUser == null ? <><Typography variant="h6">Your session is expired ,please login again to view categories</Typography></>: (
+    currentUser == null ? <><Typography variant="h5">Your session is expired ,<br/>please login again to view categories :(<br/><br/><Button variant="outlined" color="primary">Login Again</Button></Typography></>: (
     viewState == 'grid' ? (<><CategoryGrid classes={classes} categories={categories} handleSnackBarCloseAction={handleSnackBarCloseAction} handleViewMarbleCategory={handleViewMarbleCategory} snackbarOpenProp={snackbarOpenProp} snackbarChildProp={snackbarChildProp} /></>) :
       viewState == 'list' ? <><CategoryList dataToRender={categories} /></> :
         <></>

@@ -4,7 +4,8 @@ import { makeStyles,createTheme } from '@material-ui/styles';
 
 export default makeStyles(theme => ({
     AppBar:{
-        backgroundColor:'orange'
+        backgroundColor:'#f2f2f2',
+        color:'black'
     },
     media: {
       height: 0,

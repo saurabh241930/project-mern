@@ -41,6 +41,7 @@ import useStyles from './styles';
 import MyCartDialog from '../Dialog/MyCartDialog';
 import { myCart } from '../../actions/cart';
 import { useSelector } from 'react-redux';
+import { Badge } from '@mui/material';
 
 
 
@@ -48,7 +49,7 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  backgroundColor: 'orange',
+  backgroundColor: '#f2f2f2',
   color: 'black',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -59,7 +60,7 @@ const openedMixin = (theme) => ({
 
 const closedMixin = (theme) => ({
   backgroundColor: 'black',
-  color: 'orange',
+  color: '#f2f2f2',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -84,7 +85,7 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor: 'white',
+  backgroundColor: '#f2f2f2',
   color: 'black',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.easeIn,
@@ -177,37 +178,37 @@ const Minidrawer = props => {
   const itemsList = [
     {
       text: "Categories",
-      icon: <ViewListIcon style={{ color: 'orange' }} />,
+      icon: <ViewListIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }} />,
       onClick: () => history.push("/")
     },
     {
       text: "Map",
-      icon: <MapIcon style={{ color: 'orange' }} />,
+      icon: <MapIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }}  />,
       onClick: () => history.push("/map")
     },
     {
       text: "My Cart",
-      icon: <ShoppingCartIcon style={{ color: 'orange' }} />,
+      icon: <ShoppingCartIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }}  />,
       onClick: () => history.push("/auth")
     },
     {
       text: "Filter",
-      icon: <EditIcon style={{ color: 'orange' }} />,
+      icon: <EditIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }}  />,
       onClick: () => history.push("/auth")
     },
     {
       text: "Register Client",
-      icon: <GroupAddIcon style={{ color: 'orange' }} />,
+      icon: <GroupAddIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }}  />,
       onClick: () => history.push("/register-client")
     },
     {
       text: "Need Help",
-      icon: <HelpIcon style={{ color: 'orange' }} />,
-      onClick: handleDialogOpen
+      icon: <HelpIcon  style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }} />,
+      onClick: () => history.push("/help")
     },
     {
       text: currUser ? "logout" : "login",
-      icon: currUser ? <PersonIcon /> : <LogoutIcon />,
+      icon: currUser ? <PersonIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }} /> : <LogoutIcon style={ open? { color: '#6B6B6B' }:{ color: '#f2f2f2' }} />,
       onClick: () => currUser ? handleLogout() : handleDialogOpen()
     },
   ];
@@ -235,7 +236,9 @@ const Minidrawer = props => {
           <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50" />
           {currUser &&
             <>
-              <IconButton onClick={handleCartDialogOpen} color="inherit"><ShoppingCartIcon style={{ color: 'orange' }} /></IconButton>
+            <Badge badgeContent={cart.cart?.cartList.length} color="error">
+              <IconButton onClick={handleCartDialogOpen} color="inherit"><ShoppingCartIcon color="action"/></IconButton>
+            </Badge>
             </>
 
           }

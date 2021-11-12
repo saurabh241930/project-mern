@@ -121,11 +121,10 @@ const AuthDialog = (props) => {
                     <br /><br />
                     <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
                     <br /><br />
-                    <Button type="submit" fullWidth variant="text" color="primary" >
+                    <Button type="submit" fullWidth variant="contained" color="error" >
                       {isLoggedIn ? 'Log Out' : 'Log In'}
                     </Button>
-                    <br /><br />
-                    <GoogleLogin
+                    {/* <GoogleLogin
                       clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
                       render={(renderProps) => (
                         <Button className={classes.googleButton} color="warning" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
@@ -135,7 +134,7 @@ const AuthDialog = (props) => {
                       onSuccess={googleSuccess}
                       onFailure={googleError}
                       cookiePolicy="single_host_origin"
-                    />
+                    /> */}
                   </form>
 
                 </StyledContainer>
