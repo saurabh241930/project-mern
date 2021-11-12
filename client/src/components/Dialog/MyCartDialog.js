@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import useStyles from './MyCartStyles.js'
-import { Card ,CardMedia} from '@mui/material';
+import { Card, CardMedia } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -55,36 +55,36 @@ const MyCartDialog = (props) => {
         </AppBar>
         {props.currUser &&
           <List>
-            {cartList?
+            {cartList ?
               <>
-              {cartList.map((marble) => (
-                <>
-                <ListItem button>
-                <Avatar
-                  variant="square"
-                  alt="Remy Sharp"
-                  src={marble.image}
-                  sx={{ width: 60, height: 60 }}
-                />
-                  <ListItemText className={classes.marbleDetails} primary={marble.qualityName} secondary={marble.basicMaterial}/>
-                  <IconButton className={classes.removeButton} variant="outlined" color="error"> <HighlightOffIcon sx={{ fontSize: 40 }}/></IconButton>
-                  </ListItem>
-                <Divider />
-                </>
-          ))}
-            </>
-            :
-            <>
-            <Typography variant="h3">No items in cart</Typography>
-            </>
+                {cartList.map((marble) => (
+                  <>
+                    <ListItem button>
+                      <Avatar
+                        variant="square"
+                        alt="Remy Sharp"
+                        src={marble.image}
+                        sx={{ width: 60, height: 60 }}
+                      />
+                      <ListItemText className={classes.marbleDetails} primary={marble.qualityName} secondary={marble.basicMaterial} />
+                      <IconButton className={classes.removeButton} variant="outlined" color="error"> <HighlightOffIcon sx={{ fontSize: 40 }} /></IconButton>
+                    </ListItem>
+                    <Divider />
+                  </>
+                ))}
+              </>
+              :
+              <>
+                <Typography variant="h3">No items in cart</Typography>
+              </>
             }
-            
-            
-            
-         
-        </List>
+
+
+
+
+          </List>
         }
-        
+
       </Dialog>
     </div>
   );

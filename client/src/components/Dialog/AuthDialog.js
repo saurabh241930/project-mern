@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box,Grid} from '@mui/material';
+import { CssBaseline, Button, DialogActions, DialogContent, DialogTitle, Dialog, Box, Grid } from '@mui/material';
 import { InputUnstyled } from '@mui/core';
 import { styled } from '@mui/material/styles';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signin } from '../../actions/auth';
 
- 
+
 import useStyles from './styles';
 
 
@@ -32,17 +32,17 @@ const AuthDialog = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const isLoggedIn = false;
-  const [showPassword,showSetPassword] = React.useState(false)
-  const [forgotPassword,toggleShowPassword] = React.useState(false)
-  const [formData,setFormData] = React.useState({
-    email:'',password:''
-})
+  const [showPassword, showSetPassword] = React.useState(false)
+  const [forgotPassword, toggleShowPassword] = React.useState(false)
+  const [formData, setFormData] = React.useState({
+    email: '', password: ''
+  })
   const dispatch = useDispatch();
 
-  const handleChange = (e) =>{
-    setFormData({...formData,[e.target.name]:e.target.value})
-}
-  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
   const handleShowPassword = () => {
     showSetPassword(true)
   }
@@ -73,7 +73,7 @@ const AuthDialog = (props) => {
     console.log(formData);
     dispatch(signin(formData, history));
     props.handleDialogCloseProp()
-}
+  }
 
   const googleError = (error) => console.error(error);
 
@@ -83,7 +83,7 @@ const AuthDialog = (props) => {
       <CssBaseline />
       <Dialog
         fullWidthS
-        onClose={() => {}}
+        onClose={() => { }}
         open={props.dilaogOpenProp}
         maxWidth="xs"
         sx={{
@@ -91,70 +91,70 @@ const AuthDialog = (props) => {
         }}
       >
         <DialogTitle>Please login</DialogTitle>
-        <br/>
+        <br />
         <DialogContent>
           <Grid>
-          { forgotPassword && (
-            <>
-            <StyledContainer>
-            <form className={classes.form}>
-              <Input name="email" label="First Name" placeholder="enter your last mail" handleChange={handleChange} autoFocus /><br/><br/>
-              <Button type="submit" fullWidth variant="contained" color="primary" >Send token on mail</Button>
-              </form>
-            </StyledContainer>
-            <br/>
-            <Grid container justify="flex-end">
-            <Grid item>
-              <Button onClick={handleForgotPassword}>Back to login</Button>
-            </Grid>
-          </Grid>
-            </>
+            {forgotPassword && (
+              <>
+                <StyledContainer>
+                  <form className={classes.form}>
+                    <Input name="email" label="First Name" placeholder="enter your last mail" handleChange={handleChange} autoFocus /><br /><br />
+                    <Button type="submit" fullWidth variant="contained" color="primary" >Send token on mail</Button>
+                  </form>
+                </StyledContainer>
+                <br />
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Button onClick={handleForgotPassword}>Back to login</Button>
+                  </Grid>
+                </Grid>
+              </>
             )}
 
 
-        {  !forgotPassword && (
-            <>
-            <StyledContainer>
+            {!forgotPassword && (
+              <>
+                <StyledContainer>
 
-            <form className={classes.form} onSubmit={handleSubmit}>
-              <Input name="email" label="Email Address" handleChange={handleChange} type="email" placeholder="email" /> 
-              <br/><br/>
-              <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-              <br/><br/>
-              <Button type="submit" fullWidth variant="text" color="primary" >
-              { isLoggedIn ? 'Log Out' : 'Log In' }
-              </Button>
-              <br/><br/>
-              <GoogleLogin
-              clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
-              render={(renderProps) => (
-                <Button className={classes.googleButton} color="warning" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
-                  Google Sign In
-                </Button>
-              )}
-              onSuccess={googleSuccess}
-              onFailure={googleError}
-              cookiePolicy="single_host_origin"
-            />
-            </form>
+                  <form className={classes.form} onSubmit={handleSubmit}>
+                    <Input name="email" label="Email Address" handleChange={handleChange} type="email" placeholder="email" />
+                    <br /><br />
+                    <Input name="password" label="Password" placeholder="password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                    <br /><br />
+                    <Button type="submit" fullWidth variant="text" color="primary" >
+                      {isLoggedIn ? 'Log Out' : 'Log In'}
+                    </Button>
+                    <br /><br />
+                    <GoogleLogin
+                      clientId="399831739132-gov2p8rf29074mvuqhgcu09vle7k2atg.apps.googleusercontent.com"
+                      render={(renderProps) => (
+                        <Button className={classes.googleButton} color="warning" fullWidth onClick={renderProps.onClick} disabled={false} startIcon={<Icon />} variant="contained">
+                          Google Sign In
+                        </Button>
+                      )}
+                      onSuccess={googleSuccess}
+                      onFailure={googleError}
+                      cookiePolicy="single_host_origin"
+                    />
+                  </form>
 
-            </StyledContainer>
-            <br/>
-            <Grid container justify="flex-end">
-            <Grid item>
-              <Button onClick={handleForgotPassword}>Forgot password?</Button>
-            </Grid>
-          </Grid>
-            </>
+                </StyledContainer>
+                <br />
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Button onClick={handleForgotPassword}>Forgot password?</Button>
+                  </Grid>
+                </Grid>
+              </>
             )}
 
-          
+
           </Grid>
-        
+
         </DialogContent>
-        <DialogActions style={{'textAlign':'center'}}>
-          
-          <Button onClick={props.handleDialogCloseProp}><ClearIcon/></Button>
+        <DialogActions style={{ 'textAlign': 'center' }}>
+
+          <Button onClick={props.handleDialogCloseProp}><ClearIcon /></Button>
         </DialogActions>
       </Dialog>
       <Box

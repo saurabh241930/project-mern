@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme,alpha } from '@mui/material/styles';
+import { styled, useTheme, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -19,7 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { withRouter,Link, useHistory, useLocation } from "react-router-dom";
+import { withRouter, Link, useHistory, useLocation } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CustomDialog from '../Dialog/CustomDialog'
 import AuthDialog from '../Dialog/AuthDialog'
@@ -31,7 +31,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import {LOGOUT} from '../../constants/actionTypes'
+import { LOGOUT } from '../../constants/actionTypes'
 import MapIcon from '@mui/icons-material/Map';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { signout } from '../../actions/auth';
@@ -48,8 +48,8 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  backgroundColor:'orange',
-  color:'black',
+  backgroundColor: 'orange',
+  color: 'black',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -58,8 +58,8 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
-  backgroundColor:'black',
-  color:'orange',
+  backgroundColor: 'black',
+  color: 'orange',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -84,16 +84,16 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor:'white',
-  color:'black',
+  backgroundColor: 'white',
+  color: 'black',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.easeIn,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
-    backgroundColor:'white',
-    color:'white',
+    backgroundColor: 'white',
+    color: 'white',
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.easeIn,
@@ -108,7 +108,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
-    
+
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme),
@@ -130,21 +130,21 @@ const Minidrawer = props => {
 
   const dispatch = useDispatch();
   const { history } = props;
-  
+
   const [open, setOpen] = React.useState(false);
-  const [cartOpen,setCartOpen] = React.useState(false)
-  const [dialogOpen,setDialogueOpen] = React.useState(false)
+  const [cartOpen, setCartOpen] = React.useState(false)
+  const [dialogOpen, setDialogueOpen] = React.useState(false)
   React.useEffect(() => {
     setDialogueOpen(dialogOpen);
   }, [dialogOpen]);
 
   const cart = useSelector((state) => state.cart);
-  
+
   React.useEffect(() => {
     dispatch(myCart());
-  }, [dispatch,cartOpen]);
+  }, [dispatch, cartOpen]);
 
-  
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -177,38 +177,38 @@ const Minidrawer = props => {
   const itemsList = [
     {
       text: "Categories",
-      icon: <ViewListIcon style={{color:'orange'}} />,
+      icon: <ViewListIcon style={{ color: 'orange' }} />,
       onClick: () => history.push("/")
     },
     {
       text: "Map",
-      icon: <MapIcon style={{color:'orange'}}/>,
+      icon: <MapIcon style={{ color: 'orange' }} />,
       onClick: () => history.push("/map")
     },
     {
       text: "My Cart",
-      icon: <ShoppingCartIcon style={{color:'orange'}}/>,
+      icon: <ShoppingCartIcon style={{ color: 'orange' }} />,
       onClick: () => history.push("/auth")
     },
     {
       text: "Filter",
-      icon: <EditIcon style={{color:'orange'}}/>,
+      icon: <EditIcon style={{ color: 'orange' }} />,
       onClick: () => history.push("/auth")
     },
     {
       text: "Register Client",
-      icon: <GroupAddIcon style={{color:'orange'}}/>,
-      onClick:() => history.push("/register-client")
+      icon: <GroupAddIcon style={{ color: 'orange' }} />,
+      onClick: () => history.push("/register-client")
     },
     {
       text: "Need Help",
-      icon: <HelpIcon style={{color:'orange'}}/>,
+      icon: <HelpIcon style={{ color: 'orange' }} />,
       onClick: handleDialogOpen
     },
     {
-      text: currUser? "logout":"login" ,
-      icon: currUser? <PersonIcon/>:<LogoutIcon />,
-      onClick: () => currUser? handleLogout():handleDialogOpen()
+      text: currUser ? "logout" : "login",
+      icon: currUser ? <PersonIcon /> : <LogoutIcon />,
+      onClick: () => currUser ? handleLogout() : handleDialogOpen()
     },
   ];
 
@@ -216,7 +216,7 @@ const Minidrawer = props => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      
+
       <AppBar className={classes.appBar} position="fixed" open={open}>
 
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -232,16 +232,16 @@ const Minidrawer = props => {
           >
             <MenuIcon />
           </IconButton>
-          <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50"/>
+          <img src="https://thesmetimes.com/wp-content/uploads/2019/02/CMC-logo.jpg" height="50" />
           {currUser &&
-              <>
-              <IconButton onClick={handleCartDialogOpen}  color="inherit"><ShoppingCartIcon style={{color:'orange'}}/></IconButton>
-              </>
+            <>
+              <IconButton onClick={handleCartDialogOpen} color="inherit"><ShoppingCartIcon style={{ color: 'orange' }} /></IconButton>
+            </>
 
-        }
+          }
         </Toolbar>
       </AppBar>
-      
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -265,9 +265,9 @@ const Minidrawer = props => {
 
       <AuthDialog dilaogOpenProp={dialogOpen} historyProp={history} handleDialogCloseProp={handleDialogClose} />
       {currUser &&
-        <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose} cartList={cart.cart?.cartList} currUser={currUser}/>
+        <MyCartDialog openProp={cartOpen} handleCartDialogClose={handleCartDialogClose} cartList={cart.cart?.cartList} currUser={currUser} />
       }
-      
+
 
 
     </Box>

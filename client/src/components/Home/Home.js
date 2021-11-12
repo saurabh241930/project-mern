@@ -47,9 +47,9 @@ const Home = (props) => {
         divider={<Divider orientation="vertical" flexItem />}
         spacing={2}
       >
-        <IconButton onClick={()=>handleViewState("list")}><ListIcon/></IconButton>
-        <IconButton onClick={()=>handleViewState("grid")}><GridViewIcon/></IconButton>
-        <IconButton onClick={()=>handleViewState("detail")}><ZoomOutMapIcon/></IconButton>
+        {viewState=='list'? <IconButton disabled ><ListIcon/></IconButton>:<IconButton onClick={()=>handleViewState("list")} ><ListIcon/></IconButton>}
+        {viewState=='grid'? <IconButton disabled ><GridViewIcon/></IconButton>:<IconButton onClick={()=>handleViewState("grid")} ><GridViewIcon/></IconButton>}
+
       </Stack>
     </div>
          <Grid className={classes.adjustTop} container justify="space-between" alignItems="stretch" spacing={3}>
