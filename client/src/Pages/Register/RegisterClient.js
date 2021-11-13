@@ -1,7 +1,6 @@
 import React from 'react'
 import useStyles from './styles';
 import { Grid ,Typography,TextField, Box,Button,Paper} from '@mui/material';
-import Input from '../Utils/CustomInput'
 import { DateTimePicker,LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import InputLabel from '@mui/material/InputLabel';
@@ -12,8 +11,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
-import { AUTH } from '../../constants/actionTypes';
 import { signup } from '../../actions/auth';
+import { AUTH } from '../../constants/actionTypes';
+import Input from '../../components/Utils/CustomInput';
 
 
 

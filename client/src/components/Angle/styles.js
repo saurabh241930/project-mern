@@ -53,9 +53,13 @@ export default makeStyles({
     display:'none'
   },
   img:{
-    height:'350px',
+    maxWidth:'50px',
+    maxHeight:'50px',
     objectFit:'cover',
-    backgroundRepeat:'space'
+    backgroundRepeat:'space',
+    borderStyle:'solid',
+    borderWidth:'1px',
+    borderColor:'#6b6b6b'
   },
   angle:{
     textAlign:'center',
@@ -67,16 +71,22 @@ export default makeStyles({
     
   },
   angleText:{
-    padding:'10px'
+    padding:'5px',
+
   },
   marbleGrid:{
-    textAlign:'center'
+    textAlign:'center',
+   
+    
   },
   marbleName:{
-    fontSize:'18px',
-    padding:'5px'
+    fontSize:'12px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '75ch'
+  },
+  cartButton:{
+    marginTop:'10px'
   }
-
-
-
 });

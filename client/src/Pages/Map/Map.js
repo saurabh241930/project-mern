@@ -4,13 +4,15 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Grid, CircularProgress, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMarblesAnglewise, getMarblesByCategory } from '../../actions/marbles';
 import useStyles from './styles';
-import Angle from '../Angle/Angle';
-import CartDialog from '../Dialog/CartDialog';
-import CustomSnackbar from '../Snackbar/CustomSnackbar';
+import { Stack, Button, Divider } from '@mui/material';
+import { getMarblesAnglewise, getMarblesByCategory } from '../../actions/marbles';
 import { cartAction } from '../../actions/cart';
 
+
+import CustomSnackbar from '../../components/Snackbar/CustomSnackbar';
+import CartDialog from '../../components/Dialog/CartDialog';
+import Angle from '../../components/Angle/Angle'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -70,19 +72,33 @@ const Map = (props) => {
 
   return (
     !marblesAnglewise.length ? <CircularProgress /> : (
-      <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
-        {marblesAnglewise.map((marbles) => (
-          <Grid className={classes.angles} container key={marbles._id} item xs={12} sm={4} md={4}>
-            <Angle marbles={marbles} handleViewMore={handleViewMore} handleAddToCart={handleAddToCart} isExistInCart={isExistInCart} currUser={props.currUser} />
-          </Grid>
-        ))}
-        <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose} currUser={props.currUser} />
-        <CustomSnackbar
-          openState={snackBarState.snackbarOpenProp}
-          childText={snackBarState.snackbarChildProp}
-          actionTypeText={snackBarState.snacbarActionText}
-          handleSnackBarCloseProp={handleSnackBarCloseProp} />
-      </Grid>
+      <>
+        <Stack className={classes.stack}
+          direction="row"
+          justifyContent="space-around"
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={2}
+        >
+          <Button variant="text" color="success" disabled>Block C1</Button>
+          <Button variant="text" color="success" >Block C2</Button>
+          <Button variant="text" color="success">Block C3</Button>
+
+        </Stack>
+        <Grid container className={classes.container} container alignItems="stretch" spacing={3}>
+          {marblesAnglewise.map((marbles) => (
+            <Grid className={classes.angles} container key={marbles._id} item xs={12} sm={2} md={2}>
+              <Angle marbles={marbles} handleViewMore={handleViewMore} handleAddToCart={handleAddToCart} isExistInCart={isExistInCart} currUser={props.currUser} />
+            </Grid>
+          ))}
+          <CartDialog dilaogOpenProp={CartDialogOpenState} showMarbleOnDialog={MarbleDetailOnDialog} onDialogClose={handleDialogClose} currUser={props.currUser} />
+          <CustomSnackbar
+            openState={snackBarState.snackbarOpenProp}
+            childText={snackBarState.snackbarChildProp}
+            actionTypeText={snackBarState.snacbarActionText}
+            handleSnackBarCloseProp={handleSnackBarCloseProp} />
+        </Grid>
+      </>
+
     )
   );
 }

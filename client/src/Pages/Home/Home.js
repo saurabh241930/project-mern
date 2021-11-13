@@ -1,16 +1,14 @@
 import { getCategories } from '../../actions/categories';
 import { Container, Grow,Grid ,Paper,Stack,Divider,Button,IconButton} from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import CustomSnackbar from '../Snackbar/CustomSnackbar';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import useStyles from './styles';
 import { styled } from '@mui/material/styles';
 import ListIcon from '@mui/icons-material/List';
 import GridViewIcon from '@mui/icons-material/GridView';
 
-
-
-import Categories from '../Categories/Categories';
+import Categories from '../../components/Categories/Categories';
+import CustomSnackbar from '../../components/Snackbar/CustomSnackbar';
 import { useDispatch } from 'react-redux';
 
 

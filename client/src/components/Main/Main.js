@@ -2,15 +2,15 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import Home from '../Home/Home';
-import Auth from '../Auth/Auth';
-import RegisterClient from '../RegisterClient/RegisterClient'
+import Home from '../../Pages/Home/Home'
+import Profile from '../../Pages/Profile/Profile';
+import RegisterClient from '../../Pages/Register/RegisterClient'
 import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import useStyles from './styles';
 import PassPropsToChildComponents from './PassPropsToChildComponents'
 import { useSelector } from 'react-redux';
-import Map from '../Map/Map';
+import Map from '../../Pages/Map/Map';
 
 
 
@@ -18,8 +18,8 @@ const mapKeyToComponent = (key) => {
     switch (key) {
         case 'categories':
             return <Home />
-        case 'auth':
-            return <Auth/>
+        case 'profile':
+            return <Profile/>
         case 'map':
             return <Map/>
         case 'registerClient':

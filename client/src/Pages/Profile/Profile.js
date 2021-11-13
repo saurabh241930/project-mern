@@ -2,7 +2,7 @@ import React from 'react'
 import Typography from '@mui/material/Typography';
 
 
-function Auth() {
+function Profile() {
     return (
         <div>
             <Typography variant="h1">AUTH</Typography>
@@ -10,4 +10,4 @@ function Auth() {
     )
 }
 
-export default Auth
+export default Profile;

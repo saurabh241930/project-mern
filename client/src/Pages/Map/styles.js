@@ -13,5 +13,11 @@ export default makeStyles((theme) => ({
   },
   angles:{
     backgroundColor:'white',
+    borderStyle:'solid',
+    borderWidth:'1px',
+    borderColor:'rgba(0,0,0,0.1)',
+  },
+  stack:{
+    paddingBottom:'45px'
   }
 }));
