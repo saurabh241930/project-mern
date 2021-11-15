@@ -1,12 +1,17 @@
-import * as React from 'react';
-import {CssBaseline,Button,DialogActions,DialogContent,DialogTitle,Dialog,Box} from '@mui/material';
-import Input from '@mui/material/Input';
-const ariaLabel = { 'aria-label': 'description' };
-
+import * as React from "react";
+import {
+  CssBaseline,
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Dialog,
+  Box,
+} from "@mui/material";
+import Input from "@mui/material/Input";
+const ariaLabel = { "aria-label": "description" };
 
 const CustomDialog = (props) => {
-
-
   return (
     <>
       <CssBaseline />
@@ -21,7 +26,7 @@ const CustomDialog = (props) => {
       >
         <DialogTitle>Example Dialog</DialogTitle>
         <DialogContent>
-        <Input placeholder="Placeholder" inputProps={ariaLabel} />
+          <Input placeholder="Placeholder" inputProps={ariaLabel} />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleDialogCloseProp}>Close</Button>
@@ -37,7 +42,6 @@ const CustomDialog = (props) => {
       ></Box>
     </>
   );
-}
-
+};
 
 export default CustomDialog;

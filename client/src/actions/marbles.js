@@ -14,7 +14,7 @@ export const getMarblesByCategory = (categoryQuality) => async (dispatch) => {
 export const getMarblesAnglewise = () => async (dispatch) => {
     try {
       const { data } = await api.fetchAllMarblesAnglewise();
-      dispatch({ type: FETCH_MARBLES, payload: data });
+      dispatch({ type: FETCH_MARBLES, payload: data.sort((a,b) => {return  (a._id - b._id)}) });
     } catch (error) {
       console.log(error.message);
     }

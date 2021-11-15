@@ -1,12 +1,12 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-function Profile() {
+function CategoryPage() {
   return (
     <div>
-      <Typography variant="h1">AUTH</Typography>
+      <Typography variant="h1">CC</Typography>
     </div>
   );
 }
 
-export default Profile;
+export default CategoryPage;

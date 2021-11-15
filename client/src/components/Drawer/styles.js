@@ -7,7 +7,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor:'#423F40',
+    backgroundColor:'black',
     marginBottom:'50px'
   },
   heading: {

@@ -25,7 +25,7 @@ const Category = ({ category,handleViewMarbleCategory }) => {
       </div>
       <div className={classes.overlay2}>
         <Button style={{ color: 'white' }} size="small" onClick={() => { 
-   handleViewMarbleCategory(category.qualityName);
+   handleViewMarbleCategory(category,category.qualityName);
   }
  }><AppsIcon fontSize="large" /></Button>
       </div>
