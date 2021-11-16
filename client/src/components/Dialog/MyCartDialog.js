@@ -27,17 +27,17 @@ const MyCartDialog = (props) => {
 
   return (
     <div>
-      <Dialog fullScreen open={props.openProp} TransitionComponent={Transition}>
+      <Dialog open={props.openProp} >
         <AppBar className={classes.AppBar} sx={{ position: "relative" }}>
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               edge="start"
               color="inherit"
               aria-label="close"
               onClick={props.handleCartDialogClose}
             >
               <CloseIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               My Cart
             </Typography>
@@ -74,7 +74,7 @@ const MyCartDialog = (props) => {
                         color="error"
                       >
                         {" "}
-                        <HighlightOffIcon sx={{ fontSize: 40 }} />
+                        <HighlightOffIcon sx={{ fontSize: 20 }} />
                       </IconButton>
                     </ListItem>
                     <Divider />

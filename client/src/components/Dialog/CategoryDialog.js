@@ -136,8 +136,6 @@
 
 // export default CategoryDialog;
 
-
-
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -151,7 +149,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import useStyles from "./MyCartStyles.js";
+import useStyles from "./CategoryDialog.styles";
 import { Card, CardMedia } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -164,33 +162,45 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const CategoryDialog = (props) => {
   const classes = useStyles();
 
+  console.log(props);
+
   return (
     <div>
-      <Dialog fullScreen open={props.dilaogOpenProp} TransitionComponent={Transition}>
+      <Dialog
+        fullScreen
+        open={props.dilaogOpenProp}
+        TransitionComponent={Transition}
+      >
         <AppBar className={classes.AppBar} sx={{ position: "relative" }}>
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               edge="start"
               color="inherit"
               aria-label="close"
               onClick={props.onDialogClose}
             >
               <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              My Cart
+            </IconButton> */}
+            <Typography
+              
+              sx={{ ml: 2, flex: 1 }}
+              variant="h2"
+              component="div"
+            >
+              <span className={classes.Text}>{props.showCategoryMarbleOnDialog?.qualityName}</span>
+              
             </Typography>
             <Button
               autoFocus
-              color="inherit"
+              color="error"
+              variant='contained'
               onClick={props.onDialogClose}
             >
               Back
             </Button>
           </Toolbar>
         </AppBar>
-          <List>
-          </List>
+        <List></List>
       </Dialog>
     </div>
   );

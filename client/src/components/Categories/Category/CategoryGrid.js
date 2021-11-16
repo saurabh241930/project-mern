@@ -29,7 +29,7 @@ const CategoryGrid = ({
           <Grid key={category._id} item xs={12} sm={6} md={4}>
             <Category
               category={category}
-              handleViewMarbleCategory={handleViewMore}
+              handleViewMarbleCategory={handleViewMarbleCategory}
             />
           </Grid>
         ))}
@@ -40,6 +40,7 @@ const CategoryGrid = ({
         /> */}
         <CategoryDialog
           dilaogOpenProp={CategoryDialogOpenState}
+          
           showCategoryMarbleOnDialog={showCategoryMarbleOnDialog}
           onDialogClose={handleDialogClose}
           currUser={currUser}
