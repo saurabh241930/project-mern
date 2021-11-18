@@ -1,5 +1,7 @@
 import { reducers } from "../reducers";
 import thunk from 'redux-thunk';
+import LogRocket from 'logrocket';
+
 import { createStore, applyMiddleware, compose } from 'redux';
 
 
@@ -13,7 +15,8 @@ const composeEnhancers =
     }) : compose;
 
 const enhancer = composeEnhancers(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk,LogRocket.reduxMiddleware()),
+    
     // other store enhancers if any
   );
 

@@ -149,20 +149,27 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import useStyles from "./CategoryDialog.styles";
 import { Card, CardMedia } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Grid } from "@mui/material";
+import useStyles from './CategoryDialog.styles'
+import MarblesList from "../Marbles/MarblesList";
+import { useSelector } from "react-redux";
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const CategoryDialog = (props) => {
-  const classes = useStyles();
 
-  console.log(props);
+
+const CategoryDialog = (props) => {
+  const classes = useStyles(props);
+  const marbles = useSelector((state) => state.marbles);
+
 
   return (
     <div>
@@ -171,7 +178,7 @@ const CategoryDialog = (props) => {
         open={props.dilaogOpenProp}
         TransitionComponent={Transition}
       >
-        <AppBar className={classes.AppBar} sx={{ position: "relative" }}>
+        <AppBar className={classes.AppBar} style={{backgroundImage:`url("${props.showCategoryMarbleOnDialog?.image}")`}} >
           <Toolbar>
             {/* <IconButton
               edge="start"
@@ -192,15 +199,20 @@ const CategoryDialog = (props) => {
             </Typography>
             <Button
               autoFocus
-              color="error"
+              color="primary"
               variant='contained'
+              size="small"
               onClick={props.onDialogClose}
             >
-              Back
+              close
             </Button>
           </Toolbar>
         </AppBar>
-        <List></List>
+        <Grid className={classes.marblesList} container alignItems="stretch">
+          <Grid item  xs={12} sm={12} md={12}>
+              <MarblesList dataToRender={marbles}/>
+          </Grid>
+        </Grid>
       </Dialog>
     </div>
   );

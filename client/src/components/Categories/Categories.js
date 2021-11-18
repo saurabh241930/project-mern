@@ -14,13 +14,14 @@ import { useDispatch } from "react-redux";
 
 import { getMarblesByCategory } from "../../actions/marbles";
 
-const Categories = ({ currUser, viewState }) => {
+const Categories = ({ currUser, viewState, categories }) => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
   const [snackbarOpenProp, setSnackbarOpenProp] = React.useState(false);
   const [snackbarChildProp, setSnackbarChildProp] = React.useState("");
-  const [CategoryDialogOpenState, setCategoryDialogOpenState] = React.useState(false);
-  const [showCategoryMarbleOnDialog, setMarbleDetailOnDialog] = React.useState(null);
+  const [CategoryDialogOpenState, setCategoryDialogOpenState] =
+    React.useState(false);
+  const [showCategoryMarbleOnDialog, setMarbleDetailOnDialog] =
+    React.useState(null);
 
   const classes = useStyles();
 
@@ -37,7 +38,7 @@ const Categories = ({ currUser, viewState }) => {
     setCategoryDialogOpenState(false);
   };
 
-  const handleViewMarbleCategory = (category,qualityName) => {
+  const handleViewMarbleCategory = (category, qualityName) => {
     setMarbleDetailOnDialog(category);
     setCategoryDialogOpenState(true);
     dispatch(getMarblesByCategory(qualityName));
@@ -70,7 +71,6 @@ const Categories = ({ currUser, viewState }) => {
         handleDialogClose={handleDialogClose}
         currUser={currUser}
       />
-      
     </>
   ) : viewState == "list" ? (
     <>

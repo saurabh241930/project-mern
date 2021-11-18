@@ -4,21 +4,34 @@ import Autocomplete from "@mui/material/Autocomplete";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 
-export default function SearchInput() {
+const SearchInput = ({ searchData }) => {
+
+  const [inputState,setInput] = React.useState("")
+
+
+  React.useEffect(() => {
+    setInput(inputState)
+  }, [inputState])
+
+  console.log(inputState);
+
+
   return (
     <Autocomplete
       id="highlights-demo"
       sx={{ width: 250 }}
-      options={top100Films}
-      getOptionLabel={(option) => option.title}
+      options={searchData}
+      // onChange={()=>console.log(inputState)}
+      getOptionLabel={(option) => option.qualityName}
       renderInput={(params) => (
         <TextField
           {...params}
-          variant="filled"
           label="Search Marble Categories"
           size="small"
           margin="normal"
-          color='warning'
+          value={inputState}
+          onChange={(e) => setInput(e.target.value)}
+          color="warning"
           style={{
             backgroundColor: "white",
             borderRadius: "5px",
@@ -26,14 +39,16 @@ export default function SearchInput() {
         />
       )}
       renderOption={(props, option, { inputValue }) => {
-        const matches = match(option.title, inputValue);
-        const parts = parse(option.title, matches);
+        const matches = match(option.qualityName, inputValue);
+        const parts = parse(option.qualityName, matches);
+
 
         return (
           <li {...props}>
             <div>
               {parts.map((part, index) => (
                 <span
+                  onClick={()=>setInput(part.text)}
                   key={index}
                   style={{
                     fontWeight: part.highlight ? 700 : 400,
@@ -48,15 +63,6 @@ export default function SearchInput() {
       }}
     />
   );
-}
+};
 
-const top100Films = [
-  { title: "ROSATIKA", year: 1 },
-  { title: "GRIGIO VENATO", year: 2 },
-  { title: "BEIGE BENZ BROWN", year: 3 },
-  { title: "TOBACCO CROSS CUT", year: 4 },
-  { title: "ROSATIKA", year: 1 },
-  { title: "GRIGIO", year: 2 },
-  { title: "BEIGE BENZ", year: 3 },
-  { title: "TOBACCO BROWN", year: 4 },
-];
+export default SearchInput;

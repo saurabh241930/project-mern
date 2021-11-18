@@ -38,13 +38,13 @@ const Map = (props) => {
   console.log(props);
 
   const cart = useSelector((state) => state.cart);
-  const cartList = cart.cart?.cartList;
+  const cartList = cart?.cart?.cartList;
 
   const isExistInCart = (marbleId) => {
-    const foundMarble =  cartList.filter(
+    const foundMarble =  cartList?.filter(
       (marble) => marble._id == marbleId
     );
-    return foundMarble.length == 0;
+    return foundMarble && foundMarble.length == 0 
   };
   const handleViewMore = (marble) => {
     setMarbleDetailOnDialog(marble);
@@ -86,7 +86,7 @@ const Map = (props) => {
 
   return (props.currUser === null)  ? 
     <></>:
-    (marblesAnglewise.length === 0) ?
+    (marblesAnglewise?.length === 0) ?
     <CircularProgress />
     :(
     <>
@@ -99,12 +99,6 @@ const Map = (props) => {
       >
         <Button variant="text" color="success" disabled>
           Block C1
-        </Button>
-        <Button variant="text" color="success">
-          Block C2
-        </Button>
-        <Button variant="text" color="success">
-          Block C3
         </Button>
       </Stack>
       <Grid
@@ -128,7 +122,7 @@ const Map = (props) => {
               marbles={marbles}
               handleViewMore={handleViewMore}
               handleAddToCart={handleAddToCart}
-              isExistInCart={isExistInCart}
+              isExistInCart={cart.cart && isExistInCart}
               currUser={props.currUser}
             />
           </Grid>

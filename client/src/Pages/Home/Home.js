@@ -15,11 +15,13 @@ import useStyles from "./styles";
 import { styled } from "@mui/material/styles";
 import ListIcon from "@mui/icons-material/List";
 import GridViewIcon from "@mui/icons-material/GridView";
+import { useSelector } from "react-redux";
+
 
 import Categories from "../../components/Categories/Categories";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 import { useDispatch } from "react-redux";
-
+import SearchInput from '../../components/Search/SearchInput'
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -40,6 +42,9 @@ const Home = (props) => {
     dispatch(getCategories());
   }, [props.currUser, dispatch]);
 
+  const categories = useSelector((state) => state.categories);
+
+
   return (
     <Grow in>
       <Container>
@@ -51,6 +56,8 @@ const Home = (props) => {
             divider={<Divider orientation="vertical" flexItem />}
             spacing={2}
           >
+            <div style={{justifyContent:"end"}}><SearchInput searchData={categories}/></div>
+            
 
             {viewState == "list" ? (
               <IconButton disabled>
@@ -80,7 +87,7 @@ const Home = (props) => {
           spacing={3}
         >
           <Grid item xs={12} sm={12}>
-            <Categories currUser={props.currUser} viewState={viewState} />
+            <Categories currUser={props.currUser} viewState={viewState} categories={categories}/>
           </Grid>
         </Grid>
       </Container>

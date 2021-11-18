@@ -30,7 +30,37 @@ export default makeStyles(theme => ({
   },
   marbleImage:{
     backgroundColor:'red'
+  },
+  video:{
+    // width: 90%;
+    // height: 30vw;
+    // overflow: hidden;
+    // border: 15px solid red;
+    // margin-bottom: 40px;
+    // position: relative;
+  },
+  videoBackground:{
+    width: '100%', 
+    height: '100%',
+    position: 'absolute',
+    left: '0',
+    top: '0',
+    zIndex:'-1' 
+  },
+
+  videoInsert:{
+    position: 'absolute',
+    right: '0',
+    bottom: '0',
+    minWidth: '100%',
+    minHeight: '100%',
+    width: 'auto',
+    height: 'auto',
+    zIndex: '-100',
+    backgroundSize: 'cover',
+    overflow: 'hidden',
   }
+  
 }));
 
 

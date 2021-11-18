@@ -8,6 +8,7 @@ import {
   Dialog,
   Box,
   Grid,
+  Typography
 } from "@mui/material";
 import { InputUnstyled } from "@mui/core";
 import { styled } from "@mui/material/styles";
@@ -81,21 +82,35 @@ const AuthDialog = (props) => {
   const googleError = (error) => console.error(error);
 
   return (
-    <>
-      <CssBaseline />
+    <div>
+      
       <Dialog
-        fullWidthS
+        fullScreen
         onClose={() => {}}
         open={props.dilaogOpenProp}
         maxWidth="xs"
-        sx={{
+        style={{
           backdropFilter: "blur(3px)",
         }}
       >
-        <DialogTitle>Please login</DialogTitle>
-        <br />
-        <DialogContent>
-          <Grid>
+
+
+        <DialogContent >
+          <div>
+          <Grid container >
+          <Grid item xs={10} sm={10} md={10}>
+
+          <div>
+          <video className={classes.videoInsert} autoplay preload width="640" height="360">
+            <source src="http://www.w3schools.com/html/movie.mp4" type="video/mp4"/>
+          </video>
+          </div>
+          
+          </Grid>
+
+
+          <Grid item xs={2} sm={2} md={2}>
+            <Typography variant="h3" style={{paddingBottom:'20px'}}>Login</Typography>
             {forgotPassword && (
               <>
                 <StyledContainer>
@@ -155,7 +170,7 @@ const AuthDialog = (props) => {
                     <br />
                     <Button
                       type="submit"
-                      fullWidth
+                      
                       variant="contained"
                       color="error"
                     >
@@ -185,6 +200,11 @@ const AuthDialog = (props) => {
               </>
             )}
           </Grid>
+
+          </Grid>
+          </div>
+          
+          
         </DialogContent>
         <DialogActions style={{ textAlign: "center" }}>
           <Button onClick={props.handleDialogCloseProp}>
@@ -200,8 +220,9 @@ const AuthDialog = (props) => {
           backgroundSize: "cover",
         }}
       ></Box>
-    </>
+    </div>
   );
 };
 
 export default AuthDialog;
+ 

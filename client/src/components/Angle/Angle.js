@@ -44,7 +44,7 @@ const Angle = ({
   const gridCount = marbles.count <= 4 ? 12 / marbles.count : 2;
   console.log(gridCount);
 
-  return !marbles.marbles.length ? (
+  return (marbles?.marbles?.length === 0 || marbles === undefined) ? (
     <CircularProgress />
   ) : (
     <Grid container rowSpacing={0} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
@@ -54,7 +54,7 @@ const Angle = ({
           <span className={classes.angleText}>{marbles._id}</span>{" "}
         </Typography>
       </Grid>
-      {marbles.marbles.map((marble) => (
+      {marbles?.marbles?.map((marble) => (
         <Grid className={classes.marbleGrid} item xs={gridCount}>
           <img className={classes.img} src={marble.image} />
           <br />

@@ -42,7 +42,6 @@ import MyCartDialog from "../Dialog/MyCartDialog";
 import { myCart } from "../../actions/cart";
 import { useSelector } from "react-redux";
 import { Badge } from "@mui/material";
-import SearchInput from "../Search/SearchInput";
 
 const drawerWidth = 240;
 
@@ -238,7 +237,7 @@ const Minidrawer = (props) => {
       <CssBaseline />
 
       <AppBar className={classes.appBar} position="fixed" open={open}>
-        <Toolbar sx={{ justifyContent: "space-evenly" }}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -252,7 +251,6 @@ const Minidrawer = (props) => {
             <MenuIcon style={{ color: "orange" }} />
           </IconButton>
           <img sx={{justifySelf:'center'}} src="https://i.imgur.com/7Wyhc1V.jpg" height="30" />
-          <SearchInput/>
           {currUser && (
             <>
               <Badge badgeContent={cart.cart?.cartList.length} color="error">

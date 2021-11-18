@@ -1,10 +1,8 @@
-import { makeStyles,createTheme } from '@material-ui/styles';
+import { makeStyles,createTheme} from '@material-ui/styles';
 
-
-
-export default makeStyles(theme => ({
+export default makeStyles({
     AppBar:{
-        background:'url("https://4.imimg.com/data4/LW/DQ/MY-10354786/artificial-quartz-500x500.jpg")',
+        // background:`url("${props.backgroundImageLink}")`,
         objectFit: 'cover',
         color:'black',
         height:'300px'
@@ -21,10 +19,12 @@ export default makeStyles(theme => ({
         backgroundColor:'rgba(0,0,0,0.1)',
         padding:'10px'
     },
-    
-    
+    marblesList:{
+        marginTop:'300px'
+    }
+});
 
-}));
+
 
 
 
