@@ -42,7 +42,6 @@ const SearchInput = ({ searchData }) => {
         const matches = match(option.qualityName, inputValue);
         const parts = parse(option.qualityName, matches);
 
-
         return (
           <li {...props}>
             <div>
